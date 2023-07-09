@@ -1,0 +1,71 @@
+---
+name: 'Terraform CI'
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+
+permissions:
+  id-token: write  # This is required for requesting the JWT
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 5
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-github
+          role-session-name: github-action-aws-control-493370826424-ci
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      # Install the latest version of Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      # Prepare Python environment
+      - name: Setup Python Environment
+        run: make bootstrap-ci
+
+      # Run all required linters
+      - name: Code Style Check
+        run: make lint
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
+      # downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        run: |
+          make plan
+          ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
+
+      # Upload Terraform Plan
+      - name: Upload Terraform Plan
+        run: |
+          ih-plan \
+            --aws-assume-role-arn "arn:aws:iam::289256138624:role/ih-tf-aws-control-493370826424-state-manager" \
+            upload \
+            --key-name=plans/${{ github.event.pull_request.number }}.plan \
+            tf.plan
