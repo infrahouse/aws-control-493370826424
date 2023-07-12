@@ -33,3 +33,4 @@ tf.plan
 /docs/_build/
 /plan.stderr
 /plan.stdout
+/modules/jumphost/update_dns.zip
