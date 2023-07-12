@@ -1,4 +1,3 @@
-import os
 from pprint import pprint
 import boto3
 
@@ -33,9 +32,6 @@ def remove_record():
 def lambda_handler(event, context):
     print("event:")
     pprint(event)
-
-    print("context:")
-    pprint(context)
 
     client = boto3.client("sts")
     response = client.get_caller_identity()

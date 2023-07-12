@@ -77,19 +77,16 @@ resource "aws_iam_role_policy_attachment" "lambda_permissions" {
   role       = aws_iam_role.iam_for_lambda.name
 }
 
-data "archive_file" "lambda" {
-  type        = "zip"
-  source_dir  = "${path.module}/update_dns"
-  output_path = "${path.module}/update_dns.zip"
-}
-
 resource "aws_lambda_function" "update_dns" {
-  filename         = "${path.module}/update_dns.zip"
+  filename         = data.archive_file.lambda.output_path
   function_name    = "update_dns"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "main.lambda_handler"
   source_code_hash = data.archive_file.lambda.output_base64sha256
   runtime          = "python3.9"
+  depends_on = [
+    data.archive_file.lambda,
+  ]
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch" {
