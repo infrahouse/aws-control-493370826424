@@ -10,6 +10,10 @@ permissions:
   id-token: write  # This is required for requesting the JWT
   contents: read
 
+env:
+  ROLE_ARN: "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-github"
+  STATE_MGR_ROLE_ARN: "arn:aws:iam::289256138624:role/ih-tf-aws-control-493370826424-state-manager"
+
 jobs:
   apply:
     name: 'Terraform Apply'
@@ -33,7 +37,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-github
+          role-to-assume: ${{ env.ROLE_ARN }}
           role-session-name: github-action-aws-control-493370826424-cd
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
@@ -49,10 +53,15 @@ jobs:
       - name: Download plan
         run: |
           ih-plan \
-            --aws-assume-role-arn "arn:aws:iam::289256138624:role/ih-tf-aws-control-493370826424-state-manager" \
+            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
             download \
             plans/${{ github.event.pull_request.number }}.plan \
             tf.plan
+          ih-plan \
+            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
+            download \
+            --key-name=plans/${{ github.event.pull_request.number }}/update_dns.zip \
+            modules/jumphost/update_dns.zip
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
@@ -71,6 +80,10 @@ jobs:
       - name: Remove plan
         run: |
           ih-plan \
-            --aws-assume-role-arn "arn:aws:iam::289256138624:role/ih-tf-aws-control-493370826424-state-manager" \
+            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
             remove \
             plans/${{ github.event.pull_request.number }}.plan
+          ih-plan \
+            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
+            remove \
+            --key-name=plans/${{ github.event.pull_request.number }}/update_dns.zip
