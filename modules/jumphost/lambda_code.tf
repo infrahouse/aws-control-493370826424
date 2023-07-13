@@ -1,30 +1,38 @@
+locals {
+  lambda_root = "${path.module}/update_dns"
+}
 resource "null_resource" "install_python_dependencies" {
   provisioner "local-exec" {
     command = "bash ${path.module}/package_update_dns.sh"
     environment = {
-      TARGET_DIR        = "${path.module}/update_dns"
-      REQUIREMENTS_FILE = "${path.module}/update_dns/requirements.txt"
+      TARGET_DIR        = local.lambda_root
+      MODULE_DIR        = path.module
+      REQUIREMENTS_FILE = "${local.lambda_root}/requirements.txt"
     }
   }
-  depends_on = [
-    null_resource.clean_up
-  ]
   triggers = {
-    dependencies = filemd5("${path.module}/update_dns/requirements.txt")
-    code         = filemd5("${path.module}/update_dns/main.py")
+    dependencies_version = filemd5("${local.lambda_root}/requirements.txt")
+    main_version         = filemd5("${local.lambda_root}/main.py")
   }
 }
 
-resource "null_resource" "clean_up" {
-  provisioner "local-exec" {
-    command = "rm -f ${path.module}/update_dns.zip"
+resource "random_uuid" "lamda_src_hash" {
+  keepers = {
+    for filename in setunion(
+      fileset(local.lambda_root, "main.py"),
+      fileset(local.lambda_root, "requirements.txt")
+    ) :
+    filename => filemd5("${local.lambda_root}/${filename}")
   }
 }
 
 data "archive_file" "lambda" {
-  type        = "zip"
+  type = "zip"
+  excludes = [
+    "__pycache__"
+  ]
   source_dir  = "${path.module}/update_dns"
-  output_path = "${path.module}/update_dns.zip"
+  output_path = "${path.module}/${random_uuid.lamda_src_hash.result}.zip"
   depends_on = [
     null_resource.install_python_dependencies
   ]

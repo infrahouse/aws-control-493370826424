@@ -49,4 +49,3 @@ def lambda_handler(event, context):
         lifecycleactiontoken=event["detail"]["LifecycleActionToken"],
         instanceid=event["detail"]["EC2InstanceId"],
     )
-
