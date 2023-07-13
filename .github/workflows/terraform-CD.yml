@@ -57,11 +57,6 @@ jobs:
             download \
             plans/${{ github.event.pull_request.number }}.plan \
             tf.plan
-          ih-plan \
-            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
-            download \
-            --key-name=plans/${{ github.event.pull_request.number }}/update_dns.zip \
-            modules/jumphost/update_dns.zip
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
@@ -83,7 +78,3 @@ jobs:
             --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
             remove \
             plans/${{ github.event.pull_request.number }}.plan
-          ih-plan \
-            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
-            remove \
-            --key-name=plans/${{ github.event.pull_request.number }}/update_dns.zip

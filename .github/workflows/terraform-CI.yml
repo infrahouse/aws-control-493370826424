@@ -73,8 +73,3 @@ jobs:
             upload \
             --key-name=plans/${{ github.event.pull_request.number }}.plan \
             tf.plan
-          ih-plan \
-            --aws-assume-role-arn "$STATE_MGR_ROLE_ARN" \
-            upload \
-            --key-name=plans/${{ github.event.pull_request.number }}/update_dns.zip \
-            modules/jumphost/update_dns.zip
