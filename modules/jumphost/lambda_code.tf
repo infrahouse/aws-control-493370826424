@@ -37,3 +37,21 @@ data "archive_file" "lambda" {
     null_resource.install_python_dependencies
   ]
 }
+
+resource "aws_s3_bucket" "lambda_tmp" {
+  bucket_prefix = "infrahouse-jumphost-lambda-"
+}
+
+resource "aws_s3_bucket_public_access_block" "public_access" {
+  bucket                  = aws_s3_bucket.lambda_tmp.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_object" "lambda_package" {
+  bucket = aws_s3_bucket.lambda_tmp.bucket
+  key    = basename(data.archive_file.lambda.output_path)
+  source = data.archive_file.lambda.output_path
+}

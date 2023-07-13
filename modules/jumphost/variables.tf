@@ -1,12 +1,12 @@
-variable "keypair_name" {
-  description = "SSH key pair name that will be added to the jumphost instance"
-  type        = string
-}
-
 variable "ami_id" {
   description = "AMI id for jumphost instances. By default, latest Ubuntu jammy."
   type        = string
   default     = null
+}
+
+variable "keypair_name" {
+  description = "SSH key pair name that will be added to the jumphost instance"
+  type        = string
 }
 
 variable "subnet_ids" {
