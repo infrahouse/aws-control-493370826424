@@ -78,12 +78,11 @@ resource "aws_iam_role_policy_attachment" "lambda_permissions" {
 }
 
 resource "aws_lambda_function" "update_dns" {
-  s3_bucket        = aws_s3_bucket.lambda_tmp.bucket
-  s3_key           = basename(data.archive_file.lambda.output_path)
-  function_name    = "update_dns"
-  role             = aws_iam_role.iam_for_lambda.arn
-  handler          = "main.lambda_handler"
-  source_code_hash = data.archive_file.lambda.output_base64sha256
+  s3_bucket     = aws_s3_bucket.lambda_tmp.bucket
+  s3_key        = basename(data.archive_file.lambda.output_path)
+  function_name = "update_dns"
+  role          = aws_iam_role.iam_for_lambda.arn
+  handler       = "main.lambda_handler"
 
   runtime = "python3.9"
   depends_on = [
