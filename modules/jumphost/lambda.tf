@@ -85,11 +85,13 @@ resource "aws_lambda_function" "update_dns" {
   handler       = "main.lambda_handler"
 
   runtime = "python3.9"
-  environment = {
-    "ROUTE53_ZONE_ID" : var.route53_zone_id,
-    "ROUTE53_HOSTNAME" : var.route53_hostname
-    "ROUTE53_TTL" : var.route53_ttl,
-    "AWS_REGION" : data.aws_region.current.name
+  environment {
+    variables = {
+      "ROUTE53_ZONE_ID" : var.route53_zone_id,
+      "ROUTE53_HOSTNAME" : var.route53_hostname
+      "ROUTE53_TTL" : var.route53_ttl,
+      "AWS_REGION" : data.aws_region.current.name
+    }
   }
   depends_on = [
     data.archive_file.lambda,
