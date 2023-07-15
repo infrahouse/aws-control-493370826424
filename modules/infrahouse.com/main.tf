@@ -22,7 +22,7 @@ resource "aws_route53_record" "spf" {
   type    = "SPF"
   zone_id = aws_route53_zone.infrahouse_com.id
   records = [
-    "\"v=spf1 include:_spf.google.com ~all\""
+    "v=spf1 include:_spf.google.com ~all"
   ]
   ttl = 3600
 }
@@ -32,7 +32,7 @@ resource "aws_route53_record" "txt_spf" {
   type    = "TXT"
   zone_id = aws_route53_zone.infrahouse_com.id
   records = [
-    "\"v=spf1 include:_spf.google.com ~all\""
+    "v=spf1 include:_spf.google.com ~all"
   ]
   ttl = 3600
 }
@@ -42,7 +42,7 @@ resource "aws_route53_record" "txt_dkim" {
   type    = "TXT"
   zone_id = aws_route53_zone.infrahouse_com.id
   records = [
-    "\"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhRsHTvHGTZIg60W5xybWjEAa3dbxh1qUxM5yS4LAEOtPm6dlNO88SMbXQP+h82kffiOukmWnEgzoUmDs8yEqn9AuMpEsVLH5tLbzpQhWOAzEJ5aLQKtgb5snES2gdkb2jeZX60dhBm9CzlZHhBiSZRp1+hWu02f9aLe2WYwFsL/lsQsTwzYN8mTc83l/UQ2e/\" \"adsylAdWJlPmd9p8VIr63aMLVBmid2AWDQnj1RgKOHNARz6d3meTg602EEiI0+0OzHd8Zdc16kY3NUYZ1u8GBuCA5hleAYtefshhmwn5pSg375urhl3+480vp0H/jyq+DGYrDZ5Cqwgd2HjSCrzFwIDAQAB\""
+    "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhRsHTvHGTZIg60W5xybWjEAa3dbxh1qUxM5yS4LAEOtPm6dlNO88SMbXQP+h82kffiOukmWnEgzoUmDs8yEqn9AuMpEsVLH5tLbzpQhWOAzEJ5aLQKtgb5snES2gdkb2jeZX60dhBm9CzlZHhBiSZRp1+hWu02f9aLe2WYwFsL/lsQsTwzYN8mTc83l/UQ2e/ adsylAdWJlPmd9p8VIr63aMLVBmid2AWDQnj1RgKOHNARz6d3meTg602EEiI0+0OzHd8Zdc16kY3NUYZ1u8GBuCA5hleAYtefshhmwn5pSg375urhl3+480vp0H/jyq+DGYrDZ5Cqwgd2HjSCrzFwIDAQAB"
   ]
   ttl = 3600
 }
