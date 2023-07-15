@@ -16,10 +16,11 @@ resource "aws_launch_template" "jumphost" {
 }
 
 resource "aws_autoscaling_group" "jumphost" {
-  name_prefix         = aws_launch_template.jumphost.name_prefix
-  max_size            = 3
-  min_size            = 1
-  vpc_zone_identifier = var.subnet_ids
+  name_prefix           = aws_launch_template.jumphost.name_prefix
+  max_size              = 3
+  min_size              = 1
+  vpc_zone_identifier   = var.subnet_ids
+  max_instance_lifetime = 90 * 24 * 3600
   launch_template {
     id      = aws_launch_template.jumphost.id
     version = aws_launch_template.jumphost.latest_version
@@ -32,6 +33,11 @@ resource "aws_autoscaling_group" "jumphost" {
     preferences {
       min_healthy_percentage = 100
     }
+  }
+  tag {
+    key                 = "Name"
+    propagate_at_launch = true
+    value               = "jumphost"
   }
 }
 
