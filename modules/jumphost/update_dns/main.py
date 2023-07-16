@@ -23,7 +23,9 @@ def add_record(zone_id, hostname, instance_id, ttl):
     """Add the instance to DNS."""
     print(f"Adding instance {instance_id} as a hostname {hostname} to zone {zone_id}")
     zone_name = get_zone_name(zone_id)
+    print(f"{zone_name =}")
     public_ip = get_public_ip(instance_id)
+    print(f"{public_ip = }")
 
     route53_client = boto3.client("route53")
     response = route53_client.list_resource_record_sets(
@@ -60,7 +62,9 @@ def remove_record(zone_id, hostname, instance_id, ttl):
     """Remove the instance from DNS."""
     print(f"Removing instance {instance_id} from zone {zone_id}")
     zone_name = get_zone_name(zone_id)
+    print(f"{zone_name =}")
     public_ip = get_public_ip(instance_id)
+    print(f"{public_ip = }")
 
     route53_client = boto3.client("route53")
     response = route53_client.list_resource_record_sets(
