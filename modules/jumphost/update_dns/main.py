@@ -1,5 +1,4 @@
 from os import environ
-from pprint import pprint
 import boto3
 
 
@@ -130,15 +129,16 @@ def get_zone_name(zone_id):
 
 
 def lambda_handler(event, context):
-    print("event:")
-    pprint(event)
+    print(f"{event = }")
 
     client = boto3.client("sts")
-    response = client.get_caller_identity()
-    print("sts response:")
-    pprint(response)
+    sts_response = client.get_caller_identity()
+    print(f"{sts_response = }")
 
-    if event["detail"]["LifecycleTransition"] == "autoscaling:EC2_INSTANCE_TERMINATING":
+    lifecycle_transition = event["detail"]["LifecycleTransition"]
+    print(f"{lifecycle_transition = }")
+
+    if lifecycle_transition == "autoscaling:EC2_INSTANCE_TERMINATING":
         remove_record(
             environ["ROUTE53_ZONE_ID"],
             environ["ROUTE53_HOSTNAME"],
@@ -146,7 +146,7 @@ def lambda_handler(event, context):
             environ["ROUTE53_TTL"],
             environ["AWS_REGION"],
         )
-    elif event["detail"]["LifecycleTransition"] == "autoscaling:EC2_INSTANCE_LAUNCHING":
+    elif lifecycle_transition == "autoscaling:EC2_INSTANCE_LAUNCHING":
         add_record(
             environ["ROUTE53_ZONE_ID"],
             environ["ROUTE53_HOSTNAME"],
