@@ -56,6 +56,6 @@ resource "aws_s3_object" "lambda_package" {
   source = data.archive_file.lambda.output_path
   provisioner "local-exec" {
     interpreter = ["timeout", "60", "bash", "-c"]
-    command     = "while true; do aws s3 ls s3://${aws_s3_bucket.lambda_tmp.bucket}/${basename(data.archive_file.lambda.output_path)} && break ; echo 'Waiting until the archive is available'; sleep 1; done"
+    command     = "aws sts get-caller-identity; while true; do aws s3 cp s3://${aws_s3_bucket.lambda_tmp.bucket}/${basename(data.archive_file.lambda.output_path)} /dev/null && break ; echo 'Waiting until the archive is available'; sleep 1; done"
   }
 }
