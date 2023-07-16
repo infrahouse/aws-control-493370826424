@@ -117,11 +117,14 @@ def remove_record(zone_id, zone_name, hostname, instance_id, ttl):
 def get_public_ip(instance_id):
     """Get the instance's public IP address by its instance_id"""
     ec2_client = boto3.client("ec2")
-    return ec2_client.describe_instances(
+    response = ec2_client.describe_instances(
         InstanceIds=[
             instance_id,
         ],
-    )["Reservations"][
+    )
+    print(f"describe_instances({instance_id}):")
+    print(response)
+    return response["Reservations"][
         0
     ]["Instances"][0]["PublicIpAddress"]
 
