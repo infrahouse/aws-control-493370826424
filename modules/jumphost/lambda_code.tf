@@ -58,13 +58,15 @@ resource "aws_s3_object" "lambda_package" {
     interpreter = ["timeout", "60", "bash", "-c"]
     command     = <<EOF
 aws sts get-caller-identity
-providers_role=$(echo ${data.aws_caller_identity.current.arn} | awk -F/ '{ print $1 "/" $2}')
-echo "provider's role = $providers_role"
+provider_account_id=${data.aws_caller_identity.current.account_id}
+provider_role_name=$(echo ${data.aws_caller_identity.current.arn} | awk -F/ '{ print $2}')
+provider_arn="arn:aws:iam::$provider_account_id:role/$provider_role_name"
+echo "provider's role = $provider_arn"
 while true
 do
   ih-plan \
     --bucket "${aws_s3_bucket.lambda_tmp.bucket}" \
-    --aws-assume-role-arn "$providers_role" \
+    --aws-assume-role-arn "$provider_arn" \
     download \
     "${basename(data.archive_file.lambda.output_path)}" \
     /dev/null && break
