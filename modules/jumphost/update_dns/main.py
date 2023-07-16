@@ -129,10 +129,6 @@ def get_public_ip(instance_id):
 def lambda_handler(event, context):
     print(f"{event = }")
 
-    client = boto3.client("sts")
-    sts_response = client.get_caller_identity()
-    print(f"{sts_response = }")
-
     lifecycle_transition = event["detail"]["LifecycleTransition"]
     print(f"{lifecycle_transition = }")
 
