@@ -91,6 +91,7 @@ resource "aws_lambda_function" "update_dns" {
   handler       = "main.lambda_handler"
 
   runtime = "python3.9"
+  timeout = 30
   environment {
     variables = {
       "ROUTE53_ZONE_ID" : var.route53_zone_id,
