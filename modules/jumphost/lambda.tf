@@ -49,6 +49,14 @@ data "aws_iam_policy_document" "lambda-permissions" {
     ]
     resources = ["*"]
   }
+  statement {
+    actions = [
+      "route53:ListResourceRecordSets"
+    ]
+    resources = [
+      "arn:aws:route53:::hostedzone/${var.route53_zone_id}"
+    ]
+  }
 }
 
 resource "aws_iam_policy" "lambda_logging" {
