@@ -75,7 +75,7 @@ resource "aws_autoscaling_lifecycle_hook" "launching" {
   autoscaling_group_name = aws_autoscaling_group.jumphost.name
   lifecycle_transition   = "autoscaling:EC2_INSTANCE_LAUNCHING"
   heartbeat_timeout      = local.lifecycle_hook_wait_time
-  default_result         = "CONTINUE"
+  default_result         = "ABANDON"
 }
 
 resource "aws_autoscaling_lifecycle_hook" "terminating" {
@@ -83,5 +83,5 @@ resource "aws_autoscaling_lifecycle_hook" "terminating" {
   autoscaling_group_name = aws_autoscaling_group.jumphost.name
   lifecycle_transition   = "autoscaling:EC2_INSTANCE_TERMINATING"
   heartbeat_timeout      = local.lifecycle_hook_wait_time
-  default_result         = "CONTINUE"
+  default_result         = "ABANDON"
 }

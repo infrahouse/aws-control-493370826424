@@ -45,9 +45,18 @@ data "aws_iam_policy_document" "lambda-permissions" {
   }
   statement {
     actions = [
-      "ec2:DescribeInstances"
+      "ec2:DescribeInstances",
+      "ec2:DescribeTags"
     ]
     resources = ["*"]
+  }
+  statement {
+    actions = [
+      "ec2:CreateTags",
+    ]
+    resources = [
+      "arn:aws:ec2:*:${data.aws_caller_identity.current.account_id}:instance/*"
+    ]
   }
   statement {
     actions = [
