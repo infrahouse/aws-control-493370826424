@@ -43,6 +43,12 @@ data "aws_iam_policy_document" "lambda-permissions" {
       aws_autoscaling_group.jumphost.arn
     ]
   }
+  statement {
+    actions = [
+      "ec2:DescribeInstances"
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_policy" "lambda_logging" {
