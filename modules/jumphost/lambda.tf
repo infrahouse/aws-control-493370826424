@@ -89,6 +89,7 @@ resource "aws_lambda_function" "update_dns" {
   function_name = "update_dns"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "main.lambda_handler"
+  timeout       = 60
 
   runtime = "python3.9"
   environment {
