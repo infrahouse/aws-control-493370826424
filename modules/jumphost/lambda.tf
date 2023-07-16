@@ -51,6 +51,7 @@ data "aws_iam_policy_document" "lambda-permissions" {
   }
   statement {
     actions = [
+      "route53:ChangeResourceRecordSets",
       "route53:ListResourceRecordSets"
     ]
     resources = [
