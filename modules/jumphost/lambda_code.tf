@@ -54,4 +54,8 @@ resource "aws_s3_object" "lambda_package" {
   bucket = aws_s3_bucket.lambda_tmp.bucket
   key    = basename(data.archive_file.lambda.output_path)
   source = data.archive_file.lambda.output_path
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    command     = "while true; do aws s3 ls ${aws_s3_bucket.lambda_tmp.bucket}/${basename(data.archive_file.lambda.output_path)} && break ; echo 'Waiting until the archive is available'; sleep 1; done"
+  }
 }
