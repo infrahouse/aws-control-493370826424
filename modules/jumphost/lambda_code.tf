@@ -58,9 +58,15 @@ resource "aws_s3_object" "lambda_package" {
     interpreter = ["timeout", "60", "bash", "-c"]
     command     = <<EOF
 aws sts get-caller-identity
+echo "provider's role = ${data.aws_caller_identity.current.arn}"
 while true
 do
-  aws s3 cp s3://${aws_s3_bucket.lambda_tmp.bucket}/${basename(data.archive_file.lambda.output_path)} /dev/null && break
+  ih-plan \
+    --bucket "${aws_s3_bucket.lambda_tmp.bucket}" \
+    --aws-assume-role-arn "${data.aws_caller_identity.current.arn}" \
+    download \
+    "${basename(data.archive_file.lambda.output_path)}" \
+    /dev/null && break
   echo 'Waiting until the archive is available'
   sleep 1
 done
