@@ -43,6 +43,12 @@ data "aws_iam_policy_document" "lambda-permissions" {
       aws_autoscaling_group.jumphost.arn
     ]
   }
+  statement {
+    actions = ["route53:GetHostedZone"]
+    resources = [
+      "arn:aws:route53:::hostedzone/${var.route53_zone_id}"
+    ]
+  }
 }
 
 resource "aws_iam_policy" "lambda_logging" {
