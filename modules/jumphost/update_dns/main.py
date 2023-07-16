@@ -142,7 +142,7 @@ def lambda_handler(event, context):
         remove_record(
             environ["ROUTE53_ZONE_ID"],
             environ["ROUTE53_HOSTNAME"],
-            event["EC2InstanceId"],
+            event["detail"]["EC2InstanceId"],
             environ["ROUTE53_TTL"],
             environ["AWS_REGION"],
         )
@@ -150,7 +150,7 @@ def lambda_handler(event, context):
         add_record(
             environ["ROUTE53_ZONE_ID"],
             environ["ROUTE53_HOSTNAME"],
-            event["EC2InstanceId"],
+            event["detail"]["EC2InstanceId"],
             environ["ROUTE53_TTL"],
             environ["AWS_REGION"],
         )
