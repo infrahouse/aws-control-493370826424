@@ -133,26 +133,27 @@ def lambda_handler(event, context):
     lifecycle_transition = event["detail"]["LifecycleTransition"]
     print(f"{lifecycle_transition = }")
 
-    if lifecycle_transition == "autoscaling:EC2_INSTANCE_TERMINATING":
-        remove_record(
-            environ["ROUTE53_ZONE_ID"],
-            environ["ROUTE53_ZONE_NAME"],
-            environ["ROUTE53_HOSTNAME"],
-            event["detail"]["EC2InstanceId"],
-            int(environ["ROUTE53_TTL"]),
+    try:
+        if lifecycle_transition == "autoscaling:EC2_INSTANCE_TERMINATING":
+            remove_record(
+                environ["ROUTE53_ZONE_ID"],
+                environ["ROUTE53_ZONE_NAME"],
+                environ["ROUTE53_HOSTNAME"],
+                event["detail"]["EC2InstanceId"],
+                int(environ["ROUTE53_TTL"]),
+            )
+        elif lifecycle_transition == "autoscaling:EC2_INSTANCE_LAUNCHING":
+            add_record(
+                environ["ROUTE53_ZONE_ID"],
+                environ["ROUTE53_ZONE_NAME"],
+                environ["ROUTE53_HOSTNAME"],
+                event["detail"]["EC2InstanceId"],
+                int(environ["ROUTE53_TTL"]),
+            )
+    finally:
+        complete_lifecycle_action(
+            lifecyclehookname=event["detail"]["LifecycleHookName"],
+            autoscalinggroupname=event["detail"]["AutoScalingGroupName"],
+            lifecycleactiontoken=event["detail"]["LifecycleActionToken"],
+            instanceid=event["detail"]["EC2InstanceId"],
         )
-    elif lifecycle_transition == "autoscaling:EC2_INSTANCE_LAUNCHING":
-        add_record(
-            environ["ROUTE53_ZONE_ID"],
-            environ["ROUTE53_ZONE_NAME"],
-            environ["ROUTE53_HOSTNAME"],
-            event["detail"]["EC2InstanceId"],
-            int(environ["ROUTE53_TTL"]),
-        )
-
-    complete_lifecycle_action(
-        lifecyclehookname=event["detail"]["LifecycleHookName"],
-        autoscalinggroupname=event["detail"]["AutoScalingGroupName"],
-        lifecycleactiontoken=event["detail"]["LifecycleActionToken"],
-        instanceid=event["detail"]["EC2InstanceId"],
-    )
