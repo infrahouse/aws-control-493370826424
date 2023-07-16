@@ -43,12 +43,6 @@ data "aws_iam_policy_document" "lambda-permissions" {
       aws_autoscaling_group.jumphost.arn
     ]
   }
-  statement {
-    actions = ["route53:GetHostedZone"]
-    resources = [
-      "arn:aws:route53:::hostedzone/${var.route53_zone_id}"
-    ]
-  }
 }
 
 resource "aws_iam_policy" "lambda_logging" {
@@ -89,12 +83,12 @@ resource "aws_lambda_function" "update_dns" {
   function_name = "update_dns"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "main.lambda_handler"
-  timeout       = 60
 
   runtime = "python3.9"
   environment {
     variables = {
       "ROUTE53_ZONE_ID" : var.route53_zone_id,
+      "ROUTE53_ZONE_NAME" : var.route53_zone_name,
       "ROUTE53_HOSTNAME" : var.route53_hostname,
       "ROUTE53_TTL" : var.route53_ttl,
     }

@@ -19,10 +19,9 @@ def complete_lifecycle_action(
     )
 
 
-def add_record(zone_id, hostname, instance_id, ttl):
+def add_record(zone_id, zone_name, hostname, instance_id, ttl):
     """Add the instance to DNS."""
     print(f"Adding instance {instance_id} as a hostname {hostname} to zone {zone_id}")
-    zone_name = get_zone_name(zone_id)
     print(f"{zone_name =}")
     public_ip = get_public_ip(instance_id)
     print(f"{public_ip = }")
@@ -58,10 +57,9 @@ def add_record(zone_id, hostname, instance_id, ttl):
     )
 
 
-def remove_record(zone_id, hostname, instance_id, ttl):
+def remove_record(zone_id, zone_name, hostname, instance_id, ttl):
     """Remove the instance from DNS."""
     print(f"Removing instance {instance_id} from zone {zone_id}")
-    zone_name = get_zone_name(zone_id)
     print(f"{zone_name =}")
     public_ip = get_public_ip(instance_id)
     print(f"{public_ip = }")
@@ -128,12 +126,6 @@ def get_public_ip(instance_id):
     ]["Instances"][0]["PublicIpAddress"]
 
 
-def get_zone_name(zone_id):
-    """Get zone name, i.e. infrahouse.com by zone_id"""
-    route53_client = boto3.client("route53")
-    return route53_client.get_hosted_zone(Id=zone_id)["HostedZone"]["Name"]
-
-
 def lambda_handler(event, context):
     print(f"{event = }")
 
@@ -147,6 +139,7 @@ def lambda_handler(event, context):
     if lifecycle_transition == "autoscaling:EC2_INSTANCE_TERMINATING":
         remove_record(
             environ["ROUTE53_ZONE_ID"],
+            environ["ROUTE53_ZONE_NAME"],
             environ["ROUTE53_HOSTNAME"],
             event["detail"]["EC2InstanceId"],
             environ["ROUTE53_TTL"],
@@ -154,6 +147,7 @@ def lambda_handler(event, context):
     elif lifecycle_transition == "autoscaling:EC2_INSTANCE_LAUNCHING":
         add_record(
             environ["ROUTE53_ZONE_ID"],
+            environ["ROUTE53_ZONE_NAME"],
             environ["ROUTE53_HOSTNAME"],
             event["detail"]["EC2InstanceId"],
             environ["ROUTE53_TTL"],

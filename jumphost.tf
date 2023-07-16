@@ -9,7 +9,8 @@ module "jumphost" {
   providers = {
     aws = aws.aws-493370826424-uw1
   }
-  keypair_name    = aws_key_pair.aleks.key_name
-  subnet_ids      = module.management.subnet_public_ids
-  route53_zone_id = module.infrahouse_com.infrahouse_zone_id
+  keypair_name      = aws_key_pair.aleks.key_name
+  subnet_ids        = module.management.subnet_public_ids
+  route53_zone_id   = module.infrahouse_com.infrahouse_zone_id
+  route53_zone_name = module.infrahouse_com.infrahouse_zone_name
 }

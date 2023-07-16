@@ -5,3 +5,7 @@ output "infrahouse_ns" {
 output "infrahouse_zone_id" {
   value = aws_route53_zone.infrahouse_com.id
 }
+
+output "infrahouse_zone_name" {
+  value = aws_route53_zone.infrahouse_com.name
+}
