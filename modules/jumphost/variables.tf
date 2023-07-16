@@ -18,6 +18,10 @@ variable "route53_zone_id" {
   description = "Route53 zone id of a zone where this jumphost will put an A record"
 }
 
+variable "route53_zone_name" {
+  description = "Name of a zone where this jumphost will put an A record"
+}
+
 variable "route53_hostname" {
   description = "An A record with this name will be created in the rout53 zone"
   type        = string
