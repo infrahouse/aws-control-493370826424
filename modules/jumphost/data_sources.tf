@@ -29,3 +29,42 @@ data "aws_ami" "ubuntu_22" {
 data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
+
+data "template_cloudinit_config" "jumphost" {
+  gzip          = true
+  base64_encode = true
+
+  part {
+    content_type = "text/cloud-config"
+    content = join(
+      "\n",
+      [
+        "#cloud-config",
+        yamlencode(
+          {
+            "write_files" : [
+              {
+                content : join(
+                  "\n",
+                  [
+                    "[default]",
+                    "region=${data.aws_region.current.name}"
+                  ]
+                ),
+                path : "/root/.aws/config",
+                permissions : "0600"
+              }
+            ]
+            "package_update" : true,
+            "puppet" : {
+              "install" : true,
+              "install_type" : "aio",
+              "collection" : "puppet8",
+              "package_name" : "puppet-agent",
+            }
+          }
+        )
+      ]
+    )
+  }
+}

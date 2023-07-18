@@ -13,6 +13,7 @@ resource "aws_launch_template" "jumphost" {
   iam_instance_profile {
     arn = module.jumphost_profile.instance_profile_arn
   }
+  user_data = data.template_cloudinit_config.jumphost.rendered
 }
 
 resource "aws_autoscaling_group" "jumphost" {
