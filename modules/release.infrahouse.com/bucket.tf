@@ -32,6 +32,24 @@ resource "aws_s3_bucket_website_configuration" "infrahouse-release" {
   }
 }
 
+data "aws_iam_policy_document" "public-access" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    actions = ["s3:GetObject"]
+    resources = [
+      "${aws_s3_bucket.infrahouse-release.arn}/*"
+    ]
+  }
+}
+
+resource "aws_s3_bucket_policy" "public-access" {
+  bucket = aws_s3_bucket.infrahouse-release.bucket
+  policy = data.aws_iam_policy_document.public-access.json
+}
+
 resource "aws_s3_object" "index-html" {
   bucket       = aws_s3_bucket.infrahouse-release.bucket
   key          = "index.html"
