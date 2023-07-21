@@ -44,3 +44,18 @@ resource "aws_s3_object" "index-html" {
 resource "aws_s3_bucket" "infrahouse-release-logs" {
   bucket = "infrahouse-release-logs"
 }
+
+resource "aws_s3_bucket_ownership_controls" "infrahouse-release-logs" {
+  bucket = aws_s3_bucket.infrahouse-release-logs.bucket
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "infrahouse-release-logs" {
+  depends_on = [
+    aws_s3_bucket_ownership_controls.infrahouse-release
+  ]
+  bucket = aws_s3_bucket.infrahouse-release-logs.bucket
+  acl    = "private"
+}
