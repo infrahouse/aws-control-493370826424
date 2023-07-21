@@ -1,7 +1,8 @@
 module "jumphost_profile" {
-  source       = "../instance_profile"
-  permissions  = data.aws_iam_policy_document.jumphost_permissions.json
-  profile_name = "jumphost"
+  source         = "../instance_profile"
+  permissions    = data.aws_iam_policy_document.jumphost_permissions.json
+  profile_name   = "jumphost"
+  extra_policies = var.extra_policies
 }
 
 

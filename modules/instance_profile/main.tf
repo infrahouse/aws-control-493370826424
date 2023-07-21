@@ -17,3 +17,9 @@ resource "aws_iam_instance_profile" "profile" {
   name = var.profile_name
   role = aws_iam_role.profile.name
 }
+
+resource "aws_iam_role_policy_attachment" "extra" {
+  for_each   = toset(var.extra_policies)
+  policy_arn = each.value
+  role       = aws_iam_role.profile.name
+}
