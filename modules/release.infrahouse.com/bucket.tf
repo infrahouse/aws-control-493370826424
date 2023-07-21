@@ -35,10 +35,10 @@ resource "aws_s3_bucket_website_configuration" "infrahouse-release" {
 resource "aws_s3_object" "index-html" {
   bucket       = aws_s3_bucket.infrahouse-release.bucket
   key          = "index.html"
-  source       = "${path.module}/index.html"
+  source       = local.index_html_path
   acl          = "public-read"
   content_type = "text/html"
-  etag         = filemd5("${path.module}/index.html")
+  etag         = filemd5(local.index_html_path)
 }
 
 resource "aws_s3_bucket" "infrahouse-release-logs" {
