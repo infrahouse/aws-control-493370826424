@@ -44,7 +44,7 @@ resource "aws_cloudfront_distribution" "infrahouse-release" {
   }
 
   logging_config {
-    bucket = aws_s3_bucket.infrahouse-release-logs.bucket
+    bucket = aws_s3_bucket.infrahouse-release-logs.bucket_domain_name
   }
 
 }
