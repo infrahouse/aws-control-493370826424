@@ -43,6 +43,10 @@ resource "aws_cloudfront_distribution" "infrahouse-release" {
     }
   }
 
+  logging_config {
+    bucket = aws_s3_bucket.infrahouse-release-logs.bucket
+  }
+
 }
 
 resource "aws_cloudfront_cache_policy" "default" {

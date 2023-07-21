@@ -40,3 +40,7 @@ resource "aws_s3_object" "index-html" {
   content_type = "text/html"
   etag         = filemd5("${path.module}/index.html")
 }
+
+resource "aws_s3_bucket" "infrahouse-release-logs" {
+  bucket = "infrahouse-release-logs"
+}
