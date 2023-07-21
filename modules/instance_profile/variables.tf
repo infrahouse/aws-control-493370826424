@@ -1,7 +1,7 @@
 variable "extra_policies" {
-  description = "A list of additional policy ARNs to attach to the jumphost role"
-  type        = list(string)
-  default     = []
+  description = "A map of additional policy ARNs to attach to the jumphost role"
+  type        = map(string)
+  default     = {}
 }
 
 variable "profile_name" {

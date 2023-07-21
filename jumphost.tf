@@ -13,7 +13,7 @@ module "jumphost" {
   subnet_ids        = module.management.subnet_public_ids
   route53_zone_id   = module.infrahouse_com.infrahouse_zone_id
   route53_zone_name = module.infrahouse_com.infrahouse_zone_name
-  extra_policies = [
-    aws_iam_policy.package-publisher.arn
-  ]
+  extra_policies = {
+    (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
+  }
 }
