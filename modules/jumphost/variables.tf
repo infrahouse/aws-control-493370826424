@@ -4,6 +4,12 @@ variable "ami_id" {
   default     = null
 }
 
+variable "extra_policies" {
+  description = "A map of additional policy ARNs to attach to the jumphost role"
+  type        = map(string)
+  default     = {}
+}
+
 variable "keypair_name" {
   description = "SSH key pair name that will be added to the jumphost instance"
   type        = string
