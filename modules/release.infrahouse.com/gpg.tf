@@ -1,5 +1,5 @@
-data "aws_secretsmanager_random_password" "passphrase" {
-  password_length = 21
+resource "random_password" "passphrase" {
+  length = 21
 }
 
 resource "aws_secretsmanager_secret" "passphrase" {
@@ -10,7 +10,7 @@ resource "aws_secretsmanager_secret" "passphrase" {
 
 resource "aws_secretsmanager_secret_version" "passphrase" {
   secret_id     = aws_secretsmanager_secret.passphrase.id
-  secret_string = data.aws_secretsmanager_random_password.passphrase.random_password
+  secret_string = random_password.passphrase.result
 }
 
 resource "aws_secretsmanager_secret" "key" {

@@ -7,5 +7,9 @@ terraform {
         aws.ue1
       ]
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.5"
+    }
   }
 }
