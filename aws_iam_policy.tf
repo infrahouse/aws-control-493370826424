@@ -5,6 +5,15 @@ data "aws_iam_policy_document" "package-publisher" {
       "${module.release_infrahouse_com.release_bucket_arn}/*"
     ]
   }
+  statement {
+    actions = [
+      "secretsmanager:GetSecretValue"
+    ]
+    resources = [
+      module.release_infrahouse_com.packager_key_secret_arn,
+      module.release_infrahouse_com.packager_key_passphrase_secret_arn
+    ]
+  }
 }
 
 resource "aws_iam_policy" "package-publisher" {
