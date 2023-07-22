@@ -59,6 +59,15 @@ resource "aws_s3_object" "index-html" {
   etag         = filemd5(local.index_html_path)
 }
 
+resource "aws_s3_object" "deb-gpg-key-infrahouse" {
+  bucket       = aws_s3_bucket.infrahouse-release.bucket
+  key          = "DEB-GPG-KEY-infrahouse"
+  source       = local.gpg_key_path
+  acl          = "public-read"
+  content_type = "text/plain"
+  etag         = filemd5(local.gpg_key_path)
+}
+
 resource "aws_s3_bucket" "infrahouse-release-logs" {
   bucket = "infrahouse-release-logs"
 }
