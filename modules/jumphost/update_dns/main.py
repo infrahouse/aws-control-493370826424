@@ -42,8 +42,9 @@ def add_record(zone_id, zone_name, hostname, instance_id, ttl: int):
     )
     ip_set = {public_ip}
     for rr_set in response["ResourceRecordSets"]:
-        for rr in rr_set["ResourceRecords"]:
-            ip_set.add(rr["Value"])
+        if "ResourceRecords" in rr_set:
+            for rr in rr_set["ResourceRecords"]:
+                ip_set.add(rr["Value"])
 
     r_records = [{"Value": ip} for ip in list(ip_set)]
     route53_client.change_resource_record_sets(
