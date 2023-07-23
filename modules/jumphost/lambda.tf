@@ -123,6 +123,11 @@ resource "aws_lambda_function" "update_dns" {
   ]
 }
 
+resource "aws_lambda_function_event_invoke_config" "update_dns" {
+  function_name          = aws_lambda_function.update_dns.function_name
+  maximum_retry_attempts = 0
+}
+
 resource "aws_lambda_permission" "allow_cloudwatch" {
   statement_id  = "AllowExecutionFromCloudWatch-out"
   action        = "lambda:InvokeFunction"
