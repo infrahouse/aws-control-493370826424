@@ -1,12 +1,12 @@
-resource "aws_acm_certificate" "release_infrahouse" {
+resource "aws_acm_certificate" "repo" {
   provider          = aws.ue1
-  domain_name       = local.domain_name
+  domain_name       = var.domain_name
   validation_method = "DNS"
 }
 
 resource "aws_route53_record" "cert_validation" {
   for_each = {
-    for dvo in aws_acm_certificate.release_infrahouse.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.repo.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -21,10 +21,10 @@ resource "aws_route53_record" "cert_validation" {
   ttl = 60
 }
 
-resource "aws_acm_certificate_validation" "release_infrahouse" {
+resource "aws_acm_certificate_validation" "repo" {
   provider        = aws.ue1
-  certificate_arn = aws_acm_certificate.release_infrahouse.arn
+  certificate_arn = aws_acm_certificate.repo.arn
   validation_record_fqdns = [
-    aws_route53_record.cert_validation[aws_acm_certificate.release_infrahouse.domain_name].fqdn
+    aws_route53_record.cert_validation[aws_acm_certificate.repo.domain_name].fqdn
   ]
 }

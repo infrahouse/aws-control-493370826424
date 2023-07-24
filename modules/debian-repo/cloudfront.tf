@@ -1,12 +1,12 @@
-resource "aws_cloudfront_distribution" "infrahouse-release" {
+resource "aws_cloudfront_distribution" "repo" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = [local.domain_name]
+  aliases             = [var.domain_name]
 
   origin {
-    domain_name = aws_s3_bucket_website_configuration.infrahouse-release.website_endpoint
-    origin_id   = local.ih_release_origin_id
+    domain_name = aws_s3_bucket_website_configuration.repo.website_endpoint
+    origin_id   = local.origin_id
     custom_origin_config {
       http_port              = 80
       https_port             = 443
@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "infrahouse-release" {
   }
 
   default_cache_behavior {
-    target_origin_id       = local.ih_release_origin_id
+    target_origin_id       = local.origin_id
     viewer_protocol_policy = "https-only"
     allowed_methods = [
       "GET", "HEAD"
@@ -28,7 +28,7 @@ resource "aws_cloudfront_distribution" "infrahouse-release" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.release_infrahouse.arn
+    acm_certificate_arn = aws_acm_certificate.repo.arn
     ssl_support_method  = "sni-only"
   }
 
@@ -44,13 +44,13 @@ resource "aws_cloudfront_distribution" "infrahouse-release" {
   }
 
   logging_config {
-    bucket = aws_s3_bucket.infrahouse-release-logs.bucket_domain_name
+    bucket = aws_s3_bucket.repo-logs.bucket_domain_name
   }
 
 }
 
 resource "aws_cloudfront_cache_policy" "default" {
-  name        = "release_infrahouse_default"
+  name        = "${var.bucket_name}_default"
   min_ttl     = 60
   default_ttl = 300
   max_ttl     = 600

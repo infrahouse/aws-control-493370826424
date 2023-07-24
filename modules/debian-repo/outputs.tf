@@ -1,9 +1,9 @@
 output "release_bucket" {
-  value = aws_s3_bucket.infrahouse-release.bucket
+  value = aws_s3_bucket.repo.bucket
 }
 
 output "release_bucket_arn" {
-  value = aws_s3_bucket.infrahouse-release.arn
+  value = aws_s3_bucket.repo.arn
 }
 
 output "packager_key_secret_arn" {
