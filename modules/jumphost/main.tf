@@ -8,7 +8,7 @@ module "jumphost_profile" {
 
 resource "aws_launch_template" "jumphost" {
   name_prefix   = "jumphost-"
-  instance_type = "t3a.nano"
+  instance_type = "t3a.micro"
   key_name      = var.keypair_name
   image_id      = var.ami_id == null ? data.aws_ami.ubuntu_22.id : var.ami_id
   iam_instance_profile {
