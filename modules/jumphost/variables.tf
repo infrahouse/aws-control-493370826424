@@ -44,3 +44,9 @@ variable "route53_ttl" {
   type        = number
   default     = 300
 }
+
+variable "ubuntu_codename" {
+  description = "Ubuntu version to use for the jumphost"
+  type        = string
+  default     = "jammy"
+}
