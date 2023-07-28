@@ -5,12 +5,12 @@ data "aws_iam_policy_document" "jumphost_permissions" {
   }
 }
 
-data "aws_ami" "ubuntu_22" {
+data "aws_ami" "ubuntu" {
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-${var.ubuntu_codename}-*"]
   }
 
   filter {
@@ -21,6 +21,13 @@ data "aws_ami" "ubuntu_22" {
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
+  }
+
+  filter {
+    name = "state"
+    values = [
+      "available"
+    ]
   }
 
   owners = ["099720109477"] # Canonical
@@ -59,7 +66,7 @@ data "template_cloudinit_config" "jumphost" {
             apt : {
               sources : {
                 infrahouse : {
-                  source : "deb https://release-$RELEASE.infrahouse.com/ $RELEASE main"
+                  source : "deb [signed-by=$KEY_FILE] https://release-${var.ubuntu_codename}.infrahouse.com/ $RELEASE main"
                   key : var.gpg_public_key
                 }
               }
