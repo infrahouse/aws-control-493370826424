@@ -10,6 +10,11 @@ variable "extra_policies" {
   default     = {}
 }
 
+variable "gpg_public_key" {
+  description = "Public GPG key used to verify signature of the InfraHouse releases repo."
+  type        = string
+}
+
 variable "keypair_name" {
   description = "SSH key pair name that will be added to the jumphost instance"
   type        = string

@@ -42,7 +42,7 @@ data "template_cloudinit_config" "jumphost" {
         "#cloud-config",
         yamlencode(
           {
-            "write_files" : [
+            write_files : [
               {
                 content : join(
                   "\n",
@@ -56,7 +56,15 @@ data "template_cloudinit_config" "jumphost" {
               }
             ]
             "package_update" : true,
-            "puppet" : {
+            apt : {
+              sources : {
+                infrahouse : {
+                  source : "deb https://release-$RELEASE.infrahouse.com/ $RELEASE main"
+                  key : var.gpg_public_key
+                }
+              }
+            }
+            puppet : {
               "install" : true,
               "install_type" : "aio",
               "collection" : "puppet8",
