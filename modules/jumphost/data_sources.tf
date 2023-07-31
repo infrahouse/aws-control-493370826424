@@ -39,7 +39,7 @@ data "aws_region" "current" {}
 
 data "template_cloudinit_config" "jumphost" {
   gzip          = false
-  base64_encode = false
+  base64_encode = true
 
   part {
     content_type = "text/cloud-config"
