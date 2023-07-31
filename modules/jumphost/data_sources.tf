@@ -38,8 +38,8 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 data "template_cloudinit_config" "jumphost" {
-  gzip          = true
-  base64_encode = true
+  gzip          = false
+  base64_encode = false
 
   part {
     content_type = "text/cloud-config"
