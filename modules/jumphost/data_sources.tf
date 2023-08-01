@@ -60,6 +60,22 @@ data "template_cloudinit_config" "jumphost" {
                 ),
                 path : "/root/.aws/config",
                 permissions : "0600"
+              },
+              {
+                content : join(
+                  "\n",
+                  [
+                    "global : {",
+                    join("\n",
+                      [
+                        "external-dir : [ \"/etc/puppetlabs/facter/facts.d\" ]"
+                      ]
+                    ),
+                    "}"
+                  ]
+                ),
+                path : "/etc/puppetlabs/facter/facter.conf",
+                permissions : "0644"
               }
             ]
             "package_update" : true,
@@ -72,10 +88,11 @@ data "template_cloudinit_config" "jumphost" {
               }
             }
             puppet : {
-              "install" : true,
-              "install_type" : "aio",
-              "collection" : "puppet8",
-              "package_name" : "puppet-agent",
+              install : true,
+              install_type : "aio",
+              collection : "puppet8",
+              package_name : "puppet-agent",
+              start_service : false,
             }
           }
         )
