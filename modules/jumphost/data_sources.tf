@@ -37,6 +37,9 @@ data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
+locals {
+  external_facts_dir = "/etc/puppetlabs/facter/facts.d"
+}
 data "template_cloudinit_config" "jumphost" {
   gzip          = false
   base64_encode = true
@@ -62,19 +65,17 @@ data "template_cloudinit_config" "jumphost" {
                 permissions : "0600"
               },
               {
-                content : join(
-                  "\n",
-                  [
-                    "global : {",
-                    join("\n",
-                      [
-                        "external-dir : [ \"/etc/puppetlabs/facter/facts.d\" ]"
-                      ]
-                    ),
-                    "}"
+                content : yamlencode(
+                  {
+                    puppet_role : "jumphost"
+                  }
+                ),
+                path : join(
+                  "/", [
+                    local.external_facts_dir,
+                    "puppet.yaml"
                   ]
                 ),
-                path : "/etc/puppetlabs/facter/facter.conf",
                 permissions : "0644"
               }
             ]
