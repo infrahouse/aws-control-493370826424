@@ -68,6 +68,7 @@ data "template_cloudinit_config" "jumphost" {
                 content : yamlencode(
                   {
                     puppet_role : "jumphost"
+                    puppet_environment : var.environment
                   }
                 ),
                 path : join(

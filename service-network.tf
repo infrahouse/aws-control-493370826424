@@ -7,7 +7,7 @@ module "management" {
   management_cidr_block = "10.0.0.0/22"
   service_name          = "management"
   vpc_cidr_block        = "10.0.0.0/22"
-  environment           = "production"
+  environment           = var.environment
   subnets = [
     {
       cidr                    = "10.0.0.0/24"
