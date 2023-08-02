@@ -7,6 +7,7 @@ provider "aws" {
   default_tags {
     tags = {
       "created_by" : "infrahouse/aws-control-493370826424" # GitHub repository that created a resource
+      "environment" : var.environment
     }
   }
 }
@@ -20,6 +21,7 @@ provider "aws" {
   default_tags {
     tags = {
       "created_by" : "infrahouse/aws-control-493370826424" # GitHub repository that created a resource
+      "environment" : var.environment
     }
   }
 }

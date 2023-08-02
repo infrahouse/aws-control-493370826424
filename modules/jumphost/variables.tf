@@ -25,6 +25,11 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
+variable "environment" {
+  description = "Environment name. Passed on as a puppet fact"
+  type        = string
+}
+
 variable "route53_zone_id" {
   description = "Route53 zone id of a zone where this jumphost will put an A record"
 }
