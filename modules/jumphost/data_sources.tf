@@ -90,7 +90,8 @@ data "template_cloudinit_config" "jumphost" {
               }
             }
             packages : [
-              "puppet-code"
+              "puppet-code",
+              "infrahouse-toolkit"
             ],
             puppet : {
               install : true,
@@ -101,7 +102,7 @@ data "template_cloudinit_config" "jumphost" {
             }
             runcmd : [
               [
-                "bash", "/opt/puppet-code/modules/profile/files/puppet_apply.sh"
+                "ih-puppet", "apply"
               ]
             ]
           }
