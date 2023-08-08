@@ -89,6 +89,9 @@ data "template_cloudinit_config" "jumphost" {
                 }
               }
             }
+            packages : [
+              "puppet-code"
+            ],
             puppet : {
               install : true,
               install_type : "aio",
@@ -96,6 +99,11 @@ data "template_cloudinit_config" "jumphost" {
               package_name : "puppet-agent",
               start_service : false,
             }
+            runcmd : [
+              [
+                "bash", "/opt/puppet-code/modules/profile/files/puppet_apply.sh"
+              ]
+            ]
           }
         )
       ]
