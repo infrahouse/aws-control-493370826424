@@ -5,6 +5,12 @@ module "jumphost_profile" {
   extra_policies = var.extra_policies
 }
 
+module "jumphost_userdata" {
+  source         = "./../cloud-init-config"
+  environment    = var.environment
+  gpg_public_key = var.gpg_public_key
+  role           = "jumphost"
+}
 
 resource "aws_launch_template" "jumphost" {
   name_prefix   = "jumphost-"
@@ -14,7 +20,7 @@ resource "aws_launch_template" "jumphost" {
   iam_instance_profile {
     arn = module.jumphost_profile.instance_profile_arn
   }
-  user_data = data.template_cloudinit_config.jumphost.rendered
+  user_data = module.jumphost_userdata.userdata
 }
 
 resource "aws_autoscaling_group" "jumphost" {
