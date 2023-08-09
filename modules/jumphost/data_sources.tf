@@ -102,7 +102,7 @@ data "template_cloudinit_config" "jumphost" {
             }
             runcmd : [
               [
-                "ih-puppet", "apply"
+                "ih-puppet", "--debug", "apply"
               ]
             ]
           }
