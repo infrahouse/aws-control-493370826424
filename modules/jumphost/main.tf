@@ -1,5 +1,6 @@
 module "jumphost_profile" {
-  source         = "../instance_profile"
+  source         = "infrahouse/instance-profile/aws"
+  version        = "~> 1.0"
   permissions    = data.aws_iam_policy_document.jumphost_permissions.json
   profile_name   = "jumphost"
   extra_policies = var.extra_policies
