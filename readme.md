@@ -7,6 +7,9 @@ Manages resources:
 * Terraform roles `ih-tf-*`
   * `ih-tf-aws-control-493370826424-github` - a role for a GHA worker
   * `ih-tf-aws-control-493370826424-admin` - a role for Terraform applier.
-* Jumphosts
+* GitHub OpenID connection
+* InfraHouse releases repository
+* infrahouse.com zone
+* jumphost
 * Monitoring
 * Other common resources and services
