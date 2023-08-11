@@ -29,3 +29,18 @@ data "aws_ami" "ubuntu_22" {
 
   owners = ["099720109477"] # Canonical
 }
+
+data "terraform_remote_state" "cicd" {
+  backend = "s3"
+  config = {
+    bucket   = "infrahouse-aws-control-303467602807"
+    key      = "terraform.tfstate"
+    region   = "us-west-1"
+    role_arn = "arn:aws:iam::289256138624:role/ih-tf-aws-control-303467602807-state-manager-read-only"
+  }
+}
+
+data "aws_route53_zone" "cicd-ih-com" {
+  provider = aws.aws-303467602807-uw1
+  zone_id  = data.terraform_remote_state.cicd.outputs.cicd-ih-com-zone-id
+}
