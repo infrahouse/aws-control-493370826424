@@ -31,7 +31,7 @@ data "template_cloudinit_config" "config" {
               {
                 content : yamlencode(
                   {
-                    puppet_role : "jumphost"
+                    puppet_role : var.role
                     puppet_environment : var.environment
                   }
                 ),
