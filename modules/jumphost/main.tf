@@ -7,10 +7,10 @@ module "jumphost_profile" {
 }
 
 module "jumphost_userdata" {
-  source         = "./../cloud-init-config"
-  environment    = var.environment
-  gpg_public_key = var.gpg_public_key
-  role           = "jumphost"
+  source      = "infrahouse/cloud-init/aws"
+  version     = "~> 1.1, >= 1.1.1"
+  environment = var.environment
+  role        = "jumphost"
 }
 
 resource "aws_launch_template" "jumphost" {
