@@ -8,7 +8,7 @@ module "jumphost_profile" {
 
 module "jumphost_userdata" {
   source      = "infrahouse/cloud-init/aws"
-  version     = "~> 1.1, >= 1.1.1"
+  version     = "~> 1.2"
   environment = var.environment
   role        = "jumphost"
 }
