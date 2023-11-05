@@ -17,4 +17,7 @@ module "jumphost" {
   extra_policies = {
     (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
   }
+  packages = [
+    "jq"
+  ]
 }
