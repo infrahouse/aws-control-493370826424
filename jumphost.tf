@@ -5,7 +5,8 @@ resource "aws_key_pair" "aleks" {
 }
 
 module "jumphost" {
-  source = "./modules/jumphost"
+  source  = "infrahouse/jumphost/aws"
+  version = "~> 1.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
