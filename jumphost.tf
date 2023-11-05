@@ -17,5 +17,4 @@ module "jumphost" {
   extra_policies = {
     (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
   }
-  gpg_public_key = file("./files/DEB-GPG-KEY-infrahouse-jammy")
 }
