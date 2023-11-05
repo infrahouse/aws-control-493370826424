@@ -5,17 +5,16 @@ resource "aws_key_pair" "aleks" {
 }
 
 module "jumphost" {
-  source = "./modules/jumphost"
+  source  = "infrahouse/jumphost/aws"
+  version = "~> 1.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
-  keypair_name      = aws_key_pair.aleks.key_name
-  subnet_ids        = module.management.subnet_public_ids
-  environment       = var.environment
-  route53_zone_id   = module.infrahouse_com.infrahouse_zone_id
-  route53_zone_name = module.infrahouse_com.infrahouse_zone_name
+  keypair_name    = aws_key_pair.aleks.key_name
+  subnet_ids      = module.management.subnet_public_ids
+  environment     = var.environment
+  route53_zone_id = module.infrahouse_com.infrahouse_zone_id
   extra_policies = {
     (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
   }
-  gpg_public_key = file("./files/DEB-GPG-KEY-infrahouse-jammy")
 }
