@@ -18,6 +18,7 @@ module "jumphost" {
     (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
   }
   packages = [
-    "jq"
+    "jq",
+    "infrahouse-puppet-data"
   ]
 }
