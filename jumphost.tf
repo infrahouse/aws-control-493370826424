@@ -17,6 +17,7 @@ module "jumphost" {
   extra_policies = {
     (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
   }
+  puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   packages = [
     "jq",
     "infrahouse-puppet-data"
