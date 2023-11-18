@@ -6,7 +6,7 @@ resource "aws_key_pair" "aleks" {
 
 module "jumphost" {
   source  = "infrahouse/jumphost/aws"
-  version = "~> 1.0"
+  version = "~> 1.2"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
@@ -19,7 +19,6 @@ module "jumphost" {
   }
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   packages = [
-    "jq",
     "infrahouse-puppet-data"
   ]
 }
