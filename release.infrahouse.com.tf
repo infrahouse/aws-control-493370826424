@@ -10,7 +10,7 @@ module "release_infrahouse_com" {
     aws.ue1 = aws.aws-493370826424-ue1
   }
   source               = "infrahouse/debian-repo/aws"
-  version              = "~> 2.0"
+  version              = "~> 2.0, >= 2.0.1"
   bucket_name          = "infrahouse-release-${each.value}"
   repository_codename  = each.value
   domain_name          = "release-${each.value}.infrahouse.com"
