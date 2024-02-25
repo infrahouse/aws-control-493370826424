@@ -10,7 +10,7 @@ module "release_infrahouse_com" {
     aws.ue1 = aws.aws-493370826424-ue1
   }
   source               = "infrahouse/debian-repo/aws"
-  version              = "~> 2.0, >= 2.0.1"
+  version              = "~> 2.1"
   bucket_name          = "infrahouse-release-${each.value}"
   repository_codename  = each.value
   domain_name          = "release-${each.value}.infrahouse.com"
@@ -20,4 +20,8 @@ module "release_infrahouse_com" {
   index_body           = "Stay tuned!"
   zone_id              = module.infrahouse_com.infrahouse_zone_id
   bucket_force_destroy = true
+  bucket_admin_roles = [
+    module.infrahouse-puppet-data-github.github_role_arn,
+    module.puppet-code-github.github_role_arn,
+  ]
 }
