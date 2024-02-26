@@ -8,6 +8,8 @@ module "management" {
   service_name          = "management"
   vpc_cidr_block        = "10.0.0.0/22"
   environment           = var.environment
+  enable_dns_hostnames  = true
+  enable_dns_support    = true
   subnets = [
     {
       cidr                    = "10.0.0.0/24"
