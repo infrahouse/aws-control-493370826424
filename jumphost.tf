@@ -11,7 +11,8 @@ module "jumphost" {
     aws = aws.aws-493370826424-uw1
   }
   keypair_name    = aws_key_pair.aleks.key_name
-  subnet_ids      = module.management.subnet_public_ids
+  subnet_ids      = module.management.subnet_private_ids
+  nlb_subnet_ids  = module.management.subnet_public_ids
   environment     = var.environment
   route53_zone_id = module.infrahouse_com.infrahouse_zone_id
   extra_policies = {
