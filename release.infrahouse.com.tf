@@ -23,5 +23,6 @@ module "release_infrahouse_com" {
   bucket_admin_roles = [
     module.infrahouse-puppet-data-github.github_role_arn,
     module.puppet-code-github.github_role_arn,
+    module.infrahouse-toolkit-github.github_role_arn
   ]
 }
