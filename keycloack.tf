@@ -39,6 +39,7 @@ module "keycloak" {
   zone_id                       = module.infrahouse_com.infrahouse_zone_id
   container_healthcheck_command = "ls || exit 1"
   container_command             = ["start"]
+  container_memory              = "256"
   task_environment_variables = [
     {
       name : "KEYCLOAK_ADMIN"
