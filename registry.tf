@@ -1,8 +1,8 @@
 module "ecs" {
   source = "git::https://github.com/infrahouse/terraform-aws-ecs.git?ref=2.6.1"
   providers = {
-    aws     = aws
-    aws.dns = aws
+    aws     = aws.aws-493370826424-uw1
+    aws.dns = aws.aws-493370826424-uw1
   }
   asg_subnets = module.management.subnet_private_ids
   dns_names = [
