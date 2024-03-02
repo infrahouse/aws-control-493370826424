@@ -40,6 +40,7 @@ module "keycloak" {
   container_healthcheck_command = "ls || exit 1"
   container_command             = ["start"]
   asg_instance_type             = "t3.small"
+  asg_max_size                  = 2
   container_memory              = "512"
   task_environment_variables = [
     {
