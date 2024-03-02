@@ -46,6 +46,7 @@ resource "aws_secretsmanager_secret" "registry_client_secret" {
 }
 
 data "aws_secretsmanager_secret_version" "registry_client_secret" {
+  provider  = aws.aws-493370826424-uw1
   secret_id = aws_secretsmanager_secret.registry_client_secret.id
 }
 
