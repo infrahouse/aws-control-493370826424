@@ -16,3 +16,10 @@ module "ecs" {
   zone_id                       = module.infrahouse_com.infrahouse_zone_id
   container_healthcheck_command = "curl -f http://localhost:8080/ || exit 1"
 }
+
+
+resource "aws_secretsmanager_secret" "registry_client_secret" {
+  name_prefix             = "registry_client_secret"
+  description             = "Oauth2 credentials with Google"
+  recovery_window_in_days = 0
+}
