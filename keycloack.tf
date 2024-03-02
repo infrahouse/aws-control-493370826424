@@ -1,4 +1,5 @@
 resource "aws_secretsmanager_secret" "keycloak_admin_creds" {
+  provider                = aws.aws-493370826424-uw1
   name_prefix             = "keycloak_admin_credentials"
   description             = "A json with username/password keys with keycloak credentials"
   recovery_window_in_days = 0
@@ -10,6 +11,7 @@ resource "random_password" "keycloak_admin_password" {
 }
 
 resource "aws_secretsmanager_secret_version" "keycloak_admin_creds" {
+  provider  = aws.aws-493370826424-uw1
   secret_id = aws_secretsmanager_secret.keycloak_admin_creds.id
   secret_string = jsonencode(
     {
