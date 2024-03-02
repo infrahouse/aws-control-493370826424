@@ -12,6 +12,6 @@ module "ecs" {
   internet_gateway_id   = module.management.internet_gateway_id
   load_balancer_subnets = module.management.subnet_public_ids
   service_name          = "terraform-registry"
-  ssh_key_name          = aws_key_pair.aleks-Black-MBP.key_name
+  ssh_key_name          = aws_key_pair.aleks.key_name
   zone_id               = module.infrahouse_com.infrahouse_zone_id
 }
