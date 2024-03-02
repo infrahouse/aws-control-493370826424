@@ -19,6 +19,7 @@ module "ecs" {
 
 
 resource "aws_secretsmanager_secret" "registry_client_secret" {
+  provider                = aws.aws-493370826424-uw1
   name_prefix             = "registry_client_secret"
   description             = "Oauth2 credentials with Google"
   recovery_window_in_days = 0
