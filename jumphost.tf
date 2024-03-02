@@ -5,8 +5,7 @@ resource "aws_key_pair" "aleks" {
 }
 
 module "jumphost" {
-  source  = "infrahouse/jumphost/aws"
-  version = "~> 2.0"
+  source = "git::https://github.com/infrahouse/terraform-aws-jumphost.git?ref=2.1.1"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
