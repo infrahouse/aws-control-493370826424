@@ -1,0 +1,14 @@
+module.jumphost.data.aws_iam_policy_document.required_permissions
+module.jumphost.aws_autoscaling_group.jumphost
+module.jumphost.aws_iam_policy.required
+module.jumphost.aws_lb.jumphost
+module.management.aws_eip.nat_eip["10.0.2.0/24"]
+module.management.aws_nat_gateway.nat_gw["10.0.2.0/24"]
+module.management.aws_route.subnet_private["10.0.3.0/24"]
+module.management.aws_route.subnet_public["10.0.2.0/24"]
+module.management.aws_route_table.all["10.0.2.0/24"]
+module.management.aws_route_table.all["10.0.3.0/24"]
+module.management.aws_route_table_association.private_rt_assoc["10.0.2.0/24"]
+module.management.aws_route_table_association.private_rt_assoc["10.0.3.0/24"]
+module.management.aws_subnet.all["10.0.2.0/24"]
+module.management.aws_subnet.all["10.0.3.0/24"]

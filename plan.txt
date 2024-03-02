@@ -1,0 +1,547 @@
+terraform init
+
+[0m[1mInitializing the backend...[0m
+[0m[1mInitializing modules...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- terraform.io/builtin/terraform is built in to Terraform
+- Reusing previous version of hashicorp/random from the dependency lock file
+- Reusing previous version of hashicorp/cloudinit from the dependency lock file
+- Finding hashicorp/null versions matching ">= 3.2.0"...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Installing hashicorp/null v3.2.2...
+- Installed hashicorp/null v3.2.2 (signed by HashiCorp)
+- Using previously-installed hashicorp/aws v5.37.0
+- Using previously-installed hashicorp/random v3.6.0
+- Using previously-installed hashicorp/cloudinit v2.3.3
+
+Terraform has made some changes to the provider dependency selections recorded
+in the .terraform.lock.hcl file. Review those changes and commit them to your
+version control system if they represent changes you intended to make.
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+set -o pipefail ; terraform plan -no-color --out=tf.plan 2> plan.stderr | tee plan.stdout || (cat plan.stderr; exit 1)
+data.terraform_remote_state.cicd: Reading...
+module.jumphost.random_string.profile-suffix: Refreshing state... [id=Zv01ElhajbB6]
+module.release_infrahouse_com["jammy"].random_password.passphrase: Refreshing state... [id=none]
+module.jumphost.random_string.asg_name: Refreshing state... [id=02R7BZ]
+module.release_infrahouse_com["focal"].random_password.passphrase: Refreshing state... [id=none]
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy_document.github-permissions: Reading...
+module.infrahouse-puppet-data-github.data.aws_iam_openid_connect_provider.github: Reading...
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy.admin: Reading...
+module.ih-tf-github-control.data.aws_iam_openid_connect_provider.github: Reading...
+module.jumphost.data.aws_ami.ubuntu: Reading...
+module.jumphost.aws_efs_file_system.home: Refreshing state... [id=fs-0cbd3749548d04da6]
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy_document.github-permissions: Read complete after 0s [id=1585346832]
+module.release_infrahouse_com["jammy"].aws_s3_bucket.repo-logs: Refreshing state... [id=infrahouse-release-jammy-logs]
+module.release_infrahouse_com["focal"].aws_s3_bucket.repo-logs: Refreshing state... [id=infrahouse-release-focal-logs]
+module.github-connector.aws_iam_openid_connect_provider.github: Refreshing state... [id=arn:aws:iam::493370826424:oidc-provider/token.actions.githubusercontent.com]
+module.management.aws_vpc.vpc: Refreshing state... [id=vpc-08e19d859c26d18b2]
+module.jumphost.data.aws_ami.ubuntu: Read complete after 0s [id=ami-05c969369880fa2c2]
+module.release_infrahouse_com["jammy"].aws_cloudfront_origin_access_control.repo-storage: Refreshing state... [id=E19JUOM5WL9R3Q]
+module.release_infrahouse_com["focal"].aws_cloudfront_origin_access_control.repo-storage: Refreshing state... [id=EMY4YRQBY9A64]
+data.aws_ami.ubuntu_22: Reading...
+data.terraform_remote_state.cicd: Read complete after 2s
+data.aws_availability_zones.uw1: Reading...
+module.ih-tf-github-control.data.aws_iam_openid_connect_provider.github: Read complete after 1s [id=arn:aws:iam::493370826424:oidc-provider/token.actions.githubusercontent.com]
+module.infrahouse-puppet-data-github.data.aws_iam_openid_connect_provider.github: Read complete after 1s [id=arn:aws:iam::493370826424:oidc-provider/token.actions.githubusercontent.com]
+module.release_infrahouse_com["jammy"].aws_secretsmanager_secret.passphrase: Refreshing state... [id=arn:aws:secretsmanager:us-west-1:493370826424:secret:packager-passphrase-jammy-xa6PTG]
+module.release_infrahouse_com["focal"].aws_secretsmanager_secret.passphrase: Refreshing state... [id=arn:aws:secretsmanager:us-west-1:493370826424:secret:packager-passphrase-focal-gzxQPq]
+data.aws_ami.ubuntu_22: Read complete after 0s [id=ami-05c969369880fa2c2]
+module.release_infrahouse_com["jammy"].aws_s3_bucket.repo: Refreshing state... [id=infrahouse-release-jammy]
+data.aws_availability_zones.uw1: Read complete after 0s [id=us-west-1]
+module.release_infrahouse_com["focal"].aws_s3_bucket.repo: Refreshing state... [id=infrahouse-release-focal]
+module.puppet-code-github.data.aws_iam_openid_connect_provider.github: Reading...
+module.jumphost.data.aws_caller_identity.current: Reading...
+module.jumphost.data.aws_caller_identity.current: Read complete after 0s [id=493370826424]
+module.infrahouse_com.aws_route53_zone.infrahouse_com: Refreshing state... [id=Z07662251LH3YRF2ERM3G]
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy.admin: Reading...
+aws_key_pair.aleks: Refreshing state... [id=aleks]
+data.aws_iam_policy.administrator-access: Reading...
+module.infrahouse-toolkit-github.data.aws_iam_openid_connect_provider.github: Reading...
+module.release_infrahouse_com["jammy"].aws_secretsmanager_secret.key: Refreshing state... [id=arn:aws:secretsmanager:us-west-1:493370826424:secret:packager-key-jammy-XrTWrP]
+module.puppet-code-github.data.aws_iam_openid_connect_provider.github: Read complete after 0s [id=arn:aws:iam::493370826424:oidc-provider/token.actions.githubusercontent.com]
+module.release_infrahouse_com["focal"].aws_secretsmanager_secret.key: Refreshing state... [id=arn:aws:secretsmanager:us-west-1:493370826424:secret:packager-key-focal-XrTWrP]
+module.release_infrahouse_com["jammy"].aws_cloudfront_cache_policy.default: Refreshing state... [id=b04aff45-48e1-4501-90d3-998c9fa1f264]
+module.release_infrahouse_com["focal"].aws_cloudfront_cache_policy.default: Refreshing state... [id=5db494dd-546b-4231-a0c7-133b245ada49]
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy_document.github-permissions: Reading...
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy_document.github-permissions: Read complete after 0s [id=83731904]
+module.jumphost.data.aws_region.current: Reading...
+module.jumphost.data.aws_region.current: Read complete after 0s [id=us-west-1]
+module.jumphost.data.aws_iam_policy_document.jumphost_permissions: Reading...
+module.jumphost.data.aws_iam_policy_document.jumphost_permissions: Read complete after 0s [id=2218315402]
+module.jumphost.module.jumphost_userdata.data.aws_region.current: Reading...
+module.jumphost.module.jumphost_userdata.data.aws_region.current: Read complete after 0s [id=us-west-1]
+module.release_infrahouse_com["jammy"].aws_cloudfront_function.http_auth: Refreshing state... [id=release-jammy_infrahouse_com-auth]
+module.infrahouse-toolkit-github.data.aws_iam_openid_connect_provider.github: Read complete after 0s [id=arn:aws:iam::493370826424:oidc-provider/token.actions.githubusercontent.com]
+module.release_infrahouse_com["focal"].aws_cloudfront_function.http_auth: Refreshing state... [id=release-focal_infrahouse_com-auth]
+module.jumphost.module.jumphost_profile.data.aws_iam_policy_document.assume: Reading...
+module.jumphost.module.jumphost_profile.data.aws_iam_policy_document.assume: Read complete after 0s [id=2851119427]
+module.ih-tf-infrahouse-website-infra-admin.aws_iam_policy.github: Refreshing state... [id=arn:aws:iam::493370826424:policy/ih-tf-infrahouse-website-infra-github]
+module.release_infrahouse_com["focal"].aws_acm_certificate.repo: Refreshing state... [id=arn:aws:acm:us-east-1:493370826424:certificate/2eed53d3-e1ad-4743-ace5-89c193cd3c65]
+module.release_infrahouse_com["jammy"].aws_acm_certificate.repo: Refreshing state... [id=arn:aws:acm:us-east-1:493370826424:certificate/402852e1-7054-4cea-80ac-3ccbee72a398]
+data.aws_route53_zone.cicd-ih-com: Reading...
+module.ih-tf-github-control.data.aws_iam_policy_document.github-trust: Reading...
+module.ih-tf-github-control.data.aws_iam_policy_document.github-trust: Read complete after 0s [id=2982597242]
+module.infrahouse-puppet-data-github.data.aws_iam_policy_document.github-trust: Reading...
+module.infrahouse-puppet-data-github.data.aws_iam_policy_document.github-trust: Read complete after 0s [id=290351380]
+module.release_infrahouse_com["focal"].aws_secretsmanager_secret_version.passphrase: Refreshing state... [id=arn:aws:secretsmanager:us-west-1:493370826424:secret:packager-passphrase-focal-gzxQPq|6586EB13-79C2-424D-AFED-6810E61156D7]
+module.release_infrahouse_com["jammy"].aws_secretsmanager_secret_version.passphrase: Refreshing state... [id=arn:aws:secretsmanager:us-west-1:493370826424:secret:packager-passphrase-jammy-xa6PTG|D6ABCB2B-F850-4487-A764-07263736323E]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_ownership_controls.repo-logs: Refreshing state... [id=infrahouse-release-jammy-logs]
+module.release_infrahouse_com["focal"].aws_s3_bucket_ownership_controls.repo-logs: Refreshing state... [id=infrahouse-release-focal-logs]
+module.puppet-code-github.data.aws_iam_policy_document.github-trust: Reading...
+module.puppet-code-github.data.aws_iam_policy_document.github-trust: Read complete after 0s [id=2423520793]
+module.management.aws_default_route_table.default: Refreshing state... [id=rtb-0d73383afeb6ad142]
+module.management.aws_internet_gateway.ig: Refreshing state... [id=igw-079090e09ed5db582]
+module.management.aws_default_security_group.default: Refreshing state... [id=sg-08b960b85f5996100]
+module.ih-tf-aws-control-493370826424-admin.aws_iam_policy.github: Refreshing state... [id=arn:aws:iam::493370826424:policy/ih-tf-aws-control-493370826424-github]
+module.infrahouse-toolkit-github.data.aws_iam_policy_document.github-trust: Reading...
+module.infrahouse-toolkit-github.data.aws_iam_policy_document.github-trust: Read complete after 0s [id=4107919091]
+module.jumphost.module.jumphost_profile.aws_iam_role.profile: Refreshing state... [id=jumphost-Zv01ElhajbB620240223005112032800000005]
+module.infrahouse_com.aws_route53_record.txt_dkim: Refreshing state... [id=Z07662251LH3YRF2ERM3G_google._domainkey.infrahouse.com_TXT]
+module.infrahouse_com.aws_route53_record.spf: Refreshing state... [id=Z07662251LH3YRF2ERM3G_infrahouse.com_SPF]
+module.infrahouse_com.aws_route53_record.mx: Refreshing state... [id=Z07662251LH3YRF2ERM3G_infrahouse.com_MX]
+module.infrahouse_com.aws_route53_record.txt_spf: Refreshing state... [id=Z07662251LH3YRF2ERM3G_infrahouse.com_TXT]
+data.aws_iam_policy_document.infrahouse-com-github-assume: Reading...
+data.aws_iam_policy_document.infrahouse-com-github-assume: Read complete after 0s [id=1754214164]
+module.ih-tf-github-control.aws_iam_role.github: Refreshing state... [id=ih-tf-github-control-github]
+data.aws_route53_zone.cicd-ih-com: Read complete after 1s [id=Z06790082OU0POPWOCPZ4]
+module.infrahouse-puppet-data-github.aws_iam_role.github: Refreshing state... [id=ih-tf-infrahouse-puppet-data-github]
+module.management.aws_subnet.all["10.0.1.0/24"]: Refreshing state... [id=subnet-0f91dd2675e7a16c3]
+module.management.aws_subnet.all["10.0.0.0/24"]: Refreshing state... [id=subnet-0df885dcc99418799]
+module.management.aws_route_table.all["10.0.0.0/24"]: Refreshing state... [id=rtb-04a16e74d5b12a338]
+module.management.aws_route_table.all["10.0.1.0/24"]: Refreshing state... [id=rtb-067c30e65dd4108e9]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_ownership_controls.repo: Refreshing state... [id=infrahouse-release-jammy]
+module.release_infrahouse_com["focal"].aws_s3_bucket_ownership_controls.repo: Refreshing state... [id=infrahouse-release-focal]
+module.release_infrahouse_com["jammy"].aws_s3_object.distributions: Refreshing state... [id=conf/distributions]
+module.release_infrahouse_com["focal"].aws_s3_object.distributions: Refreshing state... [id=conf/distributions]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_public_access_block.repo: Refreshing state... [id=infrahouse-release-jammy]
+module.release_infrahouse_com["focal"].aws_s3_bucket_public_access_block.repo: Refreshing state... [id=infrahouse-release-focal]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_logging.server-logs: Refreshing state... [id=infrahouse-release-jammy]
+module.release_infrahouse_com["focal"].aws_s3_bucket_logging.server-logs: Refreshing state... [id=infrahouse-release-focal]
+module.puppet-code-github.aws_iam_role.github: Refreshing state... [id=ih-tf-puppet-code-github]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_acl.repo-logs: Refreshing state... [id=infrahouse-release-jammy-logs,private]
+module.release_infrahouse_com["focal"].aws_s3_bucket_acl.repo-logs: Refreshing state... [id=infrahouse-release-focal-logs,private]
+module.jumphost.module.jumphost_profile.aws_iam_policy.profile: Refreshing state... [id=arn:aws:iam::493370826424:policy/jumphost-Zv01ElhajbB620240223005112022800000002]
+module.infrahouse-toolkit-github.aws_iam_role.github: Refreshing state... [id=ih-tf-infrahouse-toolkit-github]
+module.jumphost.module.jumphost_userdata.data.cloudinit_config.config: Reading...
+module.jumphost.module.jumphost_userdata.data.cloudinit_config.config: Read complete after 0s [id=1709618770]
+module.management.aws_route.default_main: Refreshing state... [id=r-rtb-0d73383afeb6ad1421080289494]
+module.management.aws_vpc_security_group_egress_rule.default[0]: Refreshing state... [id=sgr-0e1eea4ce5b798046]
+module.management.aws_vpc_security_group_ingress_rule.default[0]: Refreshing state... [id=sgr-06140053abc62a119]
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy_document.github-assume: Reading...
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy_document.github-assume: Read complete after 0s [id=709841391]
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy_document.github-assume: Reading...
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy_document.github-assume: Read complete after 0s [id=3911844868]
+aws_iam_role.infrahouse-com-github: Refreshing state... [id=infrahouse-com-github]
+aws_route53_record.ci-cd-ns: Refreshing state... [id=Z07662251LH3YRF2ERM3G_ci-cd.infrahouse.com_NS]
+module.jumphost.module.jumphost_profile.aws_iam_instance_profile.profile: Refreshing state... [id=jumphost-Zv01ElhajbB6]
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy.admin: Read complete after 3s [id=arn:aws:iam::aws:policy/AdministratorAccess]
+module.management.aws_eip.nat_eip["10.0.0.0/24"]: Refreshing state... [id=eipalloc-02b42e70d52a5db7f]
+module.management.aws_route.subnet_public["10.0.0.0/24"]: Refreshing state... [id=r-rtb-04a16e74d5b12a3381080289494]
+module.management.aws_route_table_association.private_rt_assoc["10.0.0.0/24"]: Refreshing state... [id=rtbassoc-08a410160e2dcc592]
+module.management.aws_route_table_association.private_rt_assoc["10.0.1.0/24"]: Refreshing state... [id=rtbassoc-099b958af19485f2b]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_acl.repo: Refreshing state... [id=infrahouse-release-jammy,private]
+module.release_infrahouse_com["focal"].aws_s3_bucket_acl.repo: Refreshing state... [id=infrahouse-release-focal,private]
+module.jumphost.data.aws_route53_zone.jumphost_zone: Reading...
+module.release_infrahouse_com["jammy"].aws_route53_record.cert_validation["release-jammy.infrahouse.com"]: Refreshing state... [id=Z07662251LH3YRF2ERM3G__047ae29925ec0297eaebfeddc886f234.release-jammy.infrahouse.com._CNAME]
+module.release_infrahouse_com["focal"].aws_route53_record.cert_validation["release-focal.infrahouse.com"]: Refreshing state... [id=Z07662251LH3YRF2ERM3G__87f2ead3abf68134c497bf52718e07b1.release-focal.infrahouse.com._CNAME]
+module.ih-tf-infrahouse-website-infra-admin.aws_iam_role.github: Refreshing state... [id=ih-tf-infrahouse-website-infra-github]
+module.ih-tf-aws-control-493370826424-admin.aws_iam_role.github: Refreshing state... [id=ih-tf-aws-control-493370826424-github]
+module.management.aws_nat_gateway.nat_gw["10.0.0.0/24"]: Refreshing state... [id=nat-08fb9b52683277947]
+module.jumphost.module.jumphost_profile.aws_iam_role_policy_attachment.profile: Refreshing state... [id=jumphost-Zv01ElhajbB620240223005112032800000005-20240223005112691200000007]
+module.release_infrahouse_com["jammy"].aws_s3_object.deb-gpg-public-key: Refreshing state... [id=DEB-GPG-KEY-release-jammy.infrahouse.com]
+data.aws_iam_policy.administrator-access: Read complete after 3s [id=arn:aws:iam::aws:policy/AdministratorAccess]
+module.release_infrahouse_com["focal"].aws_s3_object.deb-gpg-public-key: Refreshing state... [id=DEB-GPG-KEY-release-focal.infrahouse.com]
+module.release_infrahouse_com["focal"].aws_s3_object.index-html: Refreshing state... [id=index.html]
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy.admin: Read complete after 3s [id=arn:aws:iam::aws:policy/AdministratorAccess]
+module.release_infrahouse_com["jammy"].aws_s3_object.index-html: Refreshing state... [id=index.html]
+module.jumphost.data.aws_subnet.nlb_selected: Reading...
+aws_iam_role_policy_attachment.test-runner-admin-permissions: Refreshing state... [id=ih-tf-github-control-github-20240302005416450800000001]
+module.jumphost.data.aws_subnet.selected: Reading...
+module.jumphost.data.aws_subnet.nlb_selected: Read complete after 0s [id=subnet-0df885dcc99418799]
+module.management.aws_route.subnet_private["10.0.1.0/24"]: Refreshing state... [id=r-rtb-067c30e65dd4108e91080289494]
+module.jumphost.data.aws_vpc.nlb_selected: Reading...
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-admin[2]: Reading...
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-admin[2]: Read complete after 0s [id=62441911]
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-admin[2]: Reading...
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-admin[2]: Read complete after 0s [id=2166003714]
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-admin[0]: Reading...
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-admin[0]: Read complete after 0s [id=571510222]
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-admin[1]: Reading...
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-admin[1]: Read complete after 0s [id=3967319674]
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-admin[0]: Reading...
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-admin[0]: Read complete after 0s [id=4198845318]
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-admin[1]: Reading...
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-admin[1]: Read complete after 0s [id=1286761665]
+module.release_infrahouse_com["focal"].aws_acm_certificate_validation.repo: Refreshing state... [id=2023-07-24 18:51:39.442 +0000 UTC]
+module.release_infrahouse_com["jammy"].aws_acm_certificate_validation.repo: Refreshing state... [id=2023-07-24 18:51:39.051 +0000 UTC]
+module.jumphost.data.aws_subnet.selected: Read complete after 0s [id=subnet-0f91dd2675e7a16c3]
+module.jumphost.aws_security_group.efs: Refreshing state... [id=sg-02906b36c9d1be156]
+module.jumphost.data.aws_vpc.selected: Reading...
+module.jumphost.aws_security_group.jumphost: Refreshing state... [id=sg-0bc8f2feda3620f6f]
+module.jumphost.data.aws_route53_zone.jumphost_zone: Read complete after 0s [id=Z07662251LH3YRF2ERM3G]
+module.ih-tf-infrahouse-website-infra-admin.aws_iam_role_policy_attachment.github: Refreshing state... [id=ih-tf-infrahouse-website-infra-github-20230818034150993400000001]
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy_document.admin-assume: Reading...
+module.ih-tf-infrahouse-website-infra-admin.data.aws_iam_policy_document.admin-assume: Read complete after 0s [id=2714260376]
+module.ih-tf-infrahouse-website-infra-admin.aws_iam_role.admin: Refreshing state... [id=ih-tf-infrahouse-website-infra-admin]
+module.jumphost.aws_vpc_security_group_egress_rule.efs: Refreshing state... [id=sgr-0db18bc63ee576445]
+module.jumphost.aws_vpc_security_group_ingress_rule.efs_icmp: Refreshing state... [id=sgr-05152071ab2f7b9e3]
+module.jumphost.aws_vpc_security_group_ingress_rule.icmp: Refreshing state... [id=sgr-0335952ea4ac17465]
+module.jumphost.aws_vpc_security_group_ingress_rule.ssh: Refreshing state... [id=sgr-08214d93ee7212b60]
+module.jumphost.aws_lb.jumphost: Refreshing state... [id=arn:aws:elasticloadbalancing:us-west-1:493370826424:loadbalancer/net/jumpho20240226175403880200000003/b3fc749d99e1aea6]
+module.jumphost.aws_vpc_security_group_egress_rule.default: Refreshing state... [id=sgr-09df3a8ea086f41c3]
+module.jumphost.aws_launch_template.jumphost: Refreshing state... [id=lt-001743d1d2257c40b]
+module.release_infrahouse_com["jammy"].aws_cloudfront_distribution.repo: Refreshing state... [id=E1IILWIY0OU78B]
+module.release_infrahouse_com["focal"].aws_cloudfront_distribution.repo: Refreshing state... [id=E161QGCPE3JIOK]
+module.ih-tf-aws-control-493370826424-admin.aws_iam_role_policy_attachment.github: Refreshing state... [id=ih-tf-aws-control-493370826424-github-20230817010818258200000001]
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy_document.admin-assume: Reading...
+module.ih-tf-aws-control-493370826424-admin.data.aws_iam_policy_document.admin-assume: Read complete after 0s [id=2899629952]
+module.ih-tf-aws-control-493370826424-admin.aws_iam_role.admin: Refreshing state... [id=ih-tf-aws-control-493370826424-admin]
+module.jumphost.data.aws_vpc.selected: Read complete after 1s [id=vpc-08e19d859c26d18b2]
+module.jumphost.aws_vpc_security_group_ingress_rule.efs: Refreshing state... [id=sgr-011e2fea66d74b99f]
+module.ih-tf-infrahouse-website-infra-admin.aws_iam_role_policy_attachment.admin: Refreshing state... [id=ih-tf-infrahouse-website-infra-admin-20230818034158985100000002]
+module.jumphost.data.aws_vpc.nlb_selected: Read complete after 1s [id=vpc-08e19d859c26d18b2]
+module.jumphost.aws_lb_target_group.jumphost: Refreshing state... [id=arn:aws:elasticloadbalancing:us-west-1:493370826424:targetgroup/jumpho20240226175402900300000002/e819b391374f847e]
+module.release_infrahouse_com["jammy"].aws_route53_record.repo: Refreshing state... [id=Z07662251LH3YRF2ERM3G_release-jammy.infrahouse.com_A]
+module.release_infrahouse_com["focal"].aws_route53_record.repo: Refreshing state... [id=Z07662251LH3YRF2ERM3G_release-focal.infrahouse.com_A]
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-cloudfront-access: Reading...
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-cloudfront-access: Reading...
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-cloudfront-access: Read complete after 0s [id=133085117]
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-cloudfront-access: Read complete after 0s [id=3872546644]
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-access: Reading...
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-access: Reading...
+module.release_infrahouse_com["jammy"].data.aws_iam_policy_document.bucket-access: Read complete after 0s [id=2929434109]
+module.release_infrahouse_com["focal"].data.aws_iam_policy_document.bucket-access: Read complete after 0s [id=4209130619]
+module.release_infrahouse_com["focal"].aws_s3_bucket_policy.bucket-access: Refreshing state... [id=infrahouse-release-focal]
+module.release_infrahouse_com["jammy"].aws_s3_bucket_policy.bucket-access: Refreshing state... [id=infrahouse-release-jammy]
+module.ih-tf-aws-control-493370826424-admin.aws_iam_role_policy_attachment.admin: Refreshing state... [id=ih-tf-aws-control-493370826424-admin-20230709164321319900000001]
+module.jumphost.aws_route53_record.jumphost_cname: Refreshing state... [id=Z07662251LH3YRF2ERM3G_jumphost.infrahouse.com_CNAME]
+data.aws_iam_policy_document.package-publisher: Reading...
+data.aws_iam_policy_document.package-publisher: Read complete after 0s [id=4050006037]
+aws_iam_policy.package-publisher: Refreshing state... [id=arn:aws:iam::493370826424:policy/package-publisher]
+module.jumphost.aws_lb_listener.jumphost: Refreshing state... [id=arn:aws:elasticloadbalancing:us-west-1:493370826424:listener/net/jumpho20240226175403880200000003/b3fc749d99e1aea6/91aca9d503ce64cc]
+module.jumphost.aws_autoscaling_group.jumphost: Refreshing state... [id=jumphost-20240223005113359100000009-02R7BZ]
+aws_iam_role_policy_attachment.infrahouse-toolkit-github: Refreshing state... [id=ih-tf-infrahouse-toolkit-github-20240229205019467600000001]
+aws_iam_role_policy_attachment.infrahouse-puppet-data-github: Refreshing state... [id=ih-tf-infrahouse-puppet-data-github-20231108133200175400000001]
+aws_iam_role_policy_attachment.puppet-code-github: Refreshing state... [id=ih-tf-puppet-code-github-20231108132248583100000001]
+aws_iam_role_policy_attachment.infrahouse-com-github: Refreshing state... [id=infrahouse-com-github-20230819214139756300000001]
+module.jumphost.aws_iam_policy.required: Refreshing state... [id=arn:aws:iam::493370826424:policy/terraform-20240223005145929800000014]
+module.jumphost.module.jumphost_profile.aws_iam_role_policy_attachment.extra["package-publisher"]: Refreshing state... [id=jumphost-Zv01ElhajbB620240223005112032800000005-20240223005146320100000015]
+module.jumphost.module.jumphost_profile.aws_iam_role_policy_attachment.extra["required"]: Refreshing state... [id=jumphost-Zv01ElhajbB620240223005112032800000005-20240223005146325300000016]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+ <= read (data resources)
+
+Terraform planned the following actions, but then encountered a problem:
+
+  # module.jumphost.data.aws_iam_policy_document.required_permissions will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "aws_iam_policy_document" "required_permissions" {
+      + id   = (known after apply)
+      + json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "autoscaling:DescribeAutoScalingInstances",
+            ]
+          + resources = [
+              + "arn:aws:autoscaling:us-west-1:493370826424:autoScalingGroup:70d22604-e11b-4b9d-95e6-f5f41a1208d6:autoScalingGroupName/jumphost-20240223005113359100000009-02R7BZ",
+            ]
+        }
+    }
+
+  # module.jumphost.aws_autoscaling_group.jumphost will be updated in-place
+  ~ resource "aws_autoscaling_group" "jumphost" {
+        id                               = "jumphost-20240223005113359100000009-02R7BZ"
+      ~ max_size                         = 2 -> 3
+      ~ min_size                         = 1 -> 2
+        name                             = "jumphost-20240223005113359100000009-02R7BZ"
+      ~ vpc_zone_identifier              = [
+          - "subnet-0f91dd2675e7a16c3",
+        ] -> (known after apply)
+        # (23 unchanged attributes hidden)
+
+        # (5 unchanged blocks hidden)
+    }
+
+  # module.jumphost.aws_iam_policy.required will be updated in-place
+  ~ resource "aws_iam_policy" "required" {
+        id          = "arn:aws:iam::493370826424:policy/terraform-20240223005145929800000014"
+        name        = "terraform-20240223005145929800000014"
+      ~ policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = "autoscaling:DescribeAutoScalingInstances"
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:autoscaling:us-west-1:493370826424:autoScalingGroup:70d22604-e11b-4b9d-95e6-f5f41a1208d6:autoScalingGroupName/jumphost-20240223005113359100000009-02R7BZ"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> (known after apply)
+        tags        = {}
+        # (5 unchanged attributes hidden)
+    }
+
+  # module.jumphost.aws_lb.jumphost will be updated in-place
+  ~ resource "aws_lb" "jumphost" {
+        id                               = "arn:aws:elasticloadbalancing:us-west-1:493370826424:loadbalancer/net/jumpho20240226175403880200000003/b3fc749d99e1aea6"
+        name                             = "jumpho20240226175403880200000003"
+      ~ subnets                          = [
+          - "subnet-0df885dcc99418799",
+        ] -> (known after apply)
+        tags                             = {
+            "created_by_module" = "infrahouse/jumphost/aws"
+        }
+        # (14 unchanged attributes hidden)
+
+      - subnet_mapping {
+          - subnet_id = "subnet-0df885dcc99418799" -> null
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+  # module.management.aws_eip.nat_eip["10.0.2.0/24"] will be created
+  + resource "aws_eip" "nat_eip" {
+      + allocation_id        = (known after apply)
+      + association_id       = (known after apply)
+      + carrier_ip           = (known after apply)
+      + customer_owned_ip    = (known after apply)
+      + domain               = "vpc"
+      + id                   = (known after apply)
+      + instance             = (known after apply)
+      + network_border_group = (known after apply)
+      + network_interface    = (known after apply)
+      + private_dns          = (known after apply)
+      + private_ip           = (known after apply)
+      + public_dns           = (known after apply)
+      + public_ip            = (known after apply)
+      + public_ipv4_pool     = (known after apply)
+      + tags                 = {
+          + "Name"        = "Elastic IP for NAT gateway"
+          + "environment" = "production"
+          + "residency"   = "10.0.2.0/24"
+          + "service"     = "management"
+        }
+      + tags_all             = {
+          + "Name"        = "Elastic IP for NAT gateway"
+          + "created_by"  = "infrahouse/aws-control-493370826424"
+          + "environment" = "production"
+          + "residency"   = "10.0.2.0/24"
+          + "service"     = "management"
+        }
+      + vpc                  = (known after apply)
+    }
+
+  # module.management.aws_nat_gateway.nat_gw["10.0.2.0/24"] will be created
+  + resource "aws_nat_gateway" "nat_gw" {
+      + allocation_id                      = (known after apply)
+      + association_id                     = (known after apply)
+      + connectivity_type                  = "public"
+      + id                                 = (known after apply)
+      + network_interface_id               = (known after apply)
+      + private_ip                         = (known after apply)
+      + public_ip                          = (known after apply)
+      + secondary_private_ip_address_count = (known after apply)
+      + secondary_private_ip_addresses     = (known after apply)
+      + subnet_id                          = (known after apply)
+      + tags                               = {
+          + "Name"        = "NAT gateway"
+          + "environment" = "production"
+          + "residency"   = "10.0.2.0/24"
+          + "service"     = "management"
+        }
+      + tags_all                           = {
+          + "Name"        = "NAT gateway"
+          + "created_by"  = "infrahouse/aws-control-493370826424"
+          + "environment" = "production"
+          + "residency"   = "10.0.2.0/24"
+          + "service"     = "management"
+        }
+    }
+
+  # module.management.aws_route.subnet_private["10.0.3.0/24"] will be created
+  + resource "aws_route" "subnet_private" {
+      + destination_cidr_block = "0.0.0.0/0"
+      + id                     = (known after apply)
+      + instance_id            = (known after apply)
+      + instance_owner_id      = (known after apply)
+      + nat_gateway_id         = (known after apply)
+      + network_interface_id   = (known after apply)
+      + origin                 = (known after apply)
+      + route_table_id         = (known after apply)
+      + state                  = (known after apply)
+    }
+
+  # module.management.aws_route.subnet_public["10.0.2.0/24"] will be created
+  + resource "aws_route" "subnet_public" {
+      + destination_cidr_block = "0.0.0.0/0"
+      + gateway_id             = "igw-079090e09ed5db582"
+      + id                     = (known after apply)
+      + instance_id            = (known after apply)
+      + instance_owner_id      = (known after apply)
+      + network_interface_id   = (known after apply)
+      + origin                 = (known after apply)
+      + route_table_id         = (known after apply)
+      + state                  = (known after apply)
+    }
+
+  # module.management.aws_route_table.all["10.0.2.0/24"] will be created
+  + resource "aws_route_table" "all" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Name"        = "Table for 10.0.2.0/24"
+          + "environment" = "production"
+          + "residency"   = "10.0.2.0/24"
+          + "service"     = "management"
+        }
+      + tags_all         = {
+          + "Name"        = "Table for 10.0.2.0/24"
+          + "created_by"  = "infrahouse/aws-control-493370826424"
+          + "environment" = "production"
+          + "residency"   = "10.0.2.0/24"
+          + "service"     = "management"
+        }
+      + vpc_id           = "vpc-08e19d859c26d18b2"
+    }
+
+  # module.management.aws_route_table.all["10.0.3.0/24"] will be created
+  + resource "aws_route_table" "all" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Name"        = "Table for 10.0.3.0/24"
+          + "environment" = "production"
+          + "residency"   = "10.0.3.0/24"
+          + "service"     = "management"
+        }
+      + tags_all         = {
+          + "Name"        = "Table for 10.0.3.0/24"
+          + "created_by"  = "infrahouse/aws-control-493370826424"
+          + "environment" = "production"
+          + "residency"   = "10.0.3.0/24"
+          + "service"     = "management"
+        }
+      + vpc_id           = "vpc-08e19d859c26d18b2"
+    }
+
+  # module.management.aws_route_table_association.private_rt_assoc["10.0.2.0/24"] will be created
+  + resource "aws_route_table_association" "private_rt_assoc" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.management.aws_route_table_association.private_rt_assoc["10.0.3.0/24"] will be created
+  + resource "aws_route_table_association" "private_rt_assoc" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.management.aws_subnet.all["10.0.2.0/24"] will be created
+  + resource "aws_subnet" "all" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-west-1c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name"        = "management: public 10.0.2.0/24"
+          + "environment" = "production"
+          + "management"  = "true"
+          + "service"     = "management"
+        }
+      + tags_all                                       = {
+          + "Name"        = "management: public 10.0.2.0/24"
+          + "created_by"  = "infrahouse/aws-control-493370826424"
+          + "environment" = "production"
+          + "management"  = "true"
+          + "service"     = "management"
+        }
+      + vpc_id                                         = "vpc-08e19d859c26d18b2"
+    }
+
+  # module.management.aws_subnet.all["10.0.3.0/24"] will be created
+  + resource "aws_subnet" "all" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-west-1c"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.3.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Name"        = "management: private 10.0.3.0/24"
+          + "environment" = "production"
+          + "management"  = "true"
+          + "service"     = "management"
+        }
+      + tags_all                                       = {
+          + "Name"        = "management: private 10.0.3.0/24"
+          + "created_by"  = "infrahouse/aws-control-493370826424"
+          + "environment" = "production"
+          + "management"  = "true"
+          + "service"     = "management"
+        }
+      + vpc_id                                         = "vpc-08e19d859c26d18b2"
+    }
+
+Plan: 10 to add, 3 to change, 0 to destroy.
+
+Error: Invalid for_each argument
+
+  on .terraform/modules/jumphost/efs.tf line 12, in resource "aws_efs_mount_target" "packages":
+  12:   for_each       = toset(var.subnet_ids)
+    ├────────────────
+    │ var.subnet_ids is list of string with 2 elements
+
+The "for_each" set includes values derived from resource attributes that
+cannot be determined until apply, and so Terraform cannot determine the full
+set of keys that will identify the instances of this resource.
+
+When working with unknown values in for_each, it's better to use a map value
+where the keys are defined statically in your configuration and where only
+the values contain apply-time results.
+
+Alternatively, you could use the -target planning option to first apply only
+the resources that the for_each value depends on, and then apply a second
+time to fully converge.
+make: *** [plan] Error 1
