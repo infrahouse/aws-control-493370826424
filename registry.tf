@@ -15,8 +15,9 @@ module "ecs" {
   ssh_key_name                  = aws_key_pair.aleks-Black-MBP.key_name
   zone_id                       = module.infrahouse_com.infrahouse_zone_id
   asg_max_size                  = 2
-  alb_healthcheck_interval      = 60
+  alb_healthcheck_interval      = 300
   alb_healthcheck_path          = "/"
+  container_memory              = "256"
   container_healthcheck_command = "ls || exit 1"
   task_environment_variables = [
     {
