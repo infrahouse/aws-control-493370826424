@@ -38,6 +38,18 @@ module "ecs" {
       value : jsondecode(
         data.aws_secretsmanager_secret_version.registry_client_secret.secret_string
       )["client_secret"]
+    },
+    {
+      name : "STORAGE_CONFIG"
+      value : "s3"
+    },
+    {
+      name : "S3_STORAGE_BUCKET_NAME"
+      value : aws_s3_bucket.terraform-registry.bucket
+    },
+    {
+      name : "S3_STORAGE_BUCKET_REGION"
+      value : aws_s3_bucket.terraform-registry.region
     }
   ]
   task_role_arn = aws_iam_role.registry-node.arn
@@ -54,4 +66,8 @@ resource "aws_secretsmanager_secret" "registry_client_secret" {
 data "aws_secretsmanager_secret_version" "registry_client_secret" {
   provider  = aws.aws-493370826424-uw1
   secret_id = aws_secretsmanager_secret.registry_client_secret.id
+}
+
+resource "aws_s3_bucket" "terraform-registry" {
+  bucket_prefix = "infrahouse-terraform-registry-"
 }
