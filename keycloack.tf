@@ -63,6 +63,10 @@ module "keycloak" {
     {
       name : "KC_HEALTH_ENABLED"
       value : true
+    },
+    {
+      name : "KC_HTTPS_PORT"
+      value : 443
     }
   ]
 }
