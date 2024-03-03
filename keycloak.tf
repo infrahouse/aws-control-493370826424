@@ -75,27 +75,27 @@ module "keycloak" {
     },
     {
       name : "KC_DB"
-      value : aws_db_instance.keycloack.engine
+      value : aws_db_instance.keycloak.engine
     },
     {
       name : "KC_DB_PASSWORD"
-      value : random_password.keycloack_service.result
+      value : random_password.keycloak_service.result
     },
     {
       name : "KC_DB_SCHEMA"
-      value : aws_db_instance.keycloack.db_name
+      value : aws_db_instance.keycloak.db_name
     },
     {
       name : "KC_DB_URL_HOST"
-      value : aws_db_instance.keycloack.address
+      value : aws_db_instance.keycloak.address
     },
     {
       name : "KC_DB_URL_PORT"
-      value : aws_db_instance.keycloack.port
+      value : aws_db_instance.keycloak.port
     },
     {
       name : "KC_DB_USERNAME"
-      value : jsondecode(aws_secretsmanager_secret_version.keycloack_service.secret_string)["username"]
+      value : jsondecode(aws_secretsmanager_secret_version.keycloak_service.secret_string)["username"]
     }
   ]
 }
