@@ -30,6 +30,22 @@ data "aws_iam_policy_document" "registry_node_permissions" {
     ]
     resources = ["*"]
   }
+  statement {
+    actions = [
+      "s3:*",
+    ]
+    resources = [
+      aws_s3_bucket.terraform-registry.arn
+    ]
+  }
+  statement {
+    actions = [
+      "s3:*",
+    ]
+    resources = [
+      "${aws_s3_bucket.terraform-registry.arn}/*"
+    ]
+  }
 }
 
 resource "aws_iam_policy" "registry_node" {
