@@ -33,16 +33,20 @@ data "aws_iam_policy_document" "registry_node_permissions" {
 }
 
 resource "aws_iam_policy" "registry_node" {
+  provider = aws.aws-493370826424-uw1
+
   name_prefix = "registry-node-"
   policy      = data.aws_iam_policy_document.registry_node_permissions.json
 }
 
 resource "aws_iam_role_policy_attachment" "task_role" {
+  provider   = aws.aws-493370826424-uw1
   policy_arn = aws_iam_policy.registry_node.arn
   role       = aws_iam_role.registry-node.name
 }
 
 resource "aws_iam_role" "registry-node" {
+  provider           = aws.aws-493370826424-uw1
   name_prefix        = "registry-node-"
   assume_role_policy = data.aws_iam_policy_document.registry_node_assume.json
 }
