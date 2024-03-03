@@ -63,3 +63,24 @@ resource "aws_vpc_security_group_egress_rule" "keycloack_outgoing" {
     Name = "outgoing traffic"
   }
 }
+
+
+resource "random_password" "keycloack_service" {
+  length = 21
+}
+
+resource "aws_secretsmanager_secret" "keycloack_service" {
+  name_prefix             = "keycloack_dba"
+  description             = "A JSON with username/password keys - MySQL account used by keycloack service"
+  recovery_window_in_days = 0
+}
+
+resource "aws_secretsmanager_secret_version" "keycloack_service" {
+  secret_id = aws_secretsmanager_secret.keycloack_service.id
+  secret_string = jsonencode(
+    {
+      username : "keycloack_service"
+      password : random_password.keycloack_service.result
+    }
+  )
+}
