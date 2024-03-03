@@ -70,7 +70,7 @@ resource "random_password" "keycloack_service" {
 }
 
 resource "aws_secretsmanager_secret" "keycloack_service" {
-  name_prefix             = "keycloack_dba"
+  name_prefix             = "keycloack_service"
   description             = "A JSON with username/password keys - MySQL account used by keycloack service"
   recovery_window_in_days = 0
 }
