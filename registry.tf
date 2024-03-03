@@ -58,6 +58,10 @@ module "ecs" {
     {
       name : "REGISTRY_PORT"
       value : 443
+    },
+    {
+      name : "JAVA_OPTS"
+      value : "-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus.http.cors=false"
     }
   ]
   task_role_arn = aws_iam_role.registry-node.arn
