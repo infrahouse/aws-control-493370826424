@@ -39,7 +39,7 @@ module "keycloak" {
   zone_id                       = module.infrahouse_com.infrahouse_zone_id
   container_healthcheck_command = "ls || exit 1"
   container_command             = ["start"]
-  alb_healthcheck_path          = "/"
+  alb_healthcheck_path          = "/health"
   asg_instance_type             = "t3.small"
   asg_max_size                  = 2
   alb_healthcheck_interval      = 60
