@@ -50,6 +50,14 @@ module "ecs" {
     {
       name : "S3_STORAGE_BUCKET_REGION"
       value : aws_s3_bucket.terraform-registry.region
+    },
+    {
+      name : "REGISTRY_HOSTNAME"
+      value : "registry.${module.infrahouse_com.infrahouse_zone_name}"
+    },
+    {
+      name : "REGISTRY_PORT"
+      value : 443
     }
   ]
   task_role_arn = aws_iam_role.registry-node.arn
