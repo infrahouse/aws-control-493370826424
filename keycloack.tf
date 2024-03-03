@@ -72,6 +72,30 @@ module "keycloak" {
     {
       name : "KC_HOSTNAME_ADMIN_URL"
       value : "https://auth.${module.infrahouse_com.infrahouse_zone_name}"
+    },
+    {
+      name : "KC_DB"
+      value : aws_db_instance.keycloack.engine
+    },
+    {
+      name : "KC_DB_PASSWORD"
+      value : random_password.keycloack_service.result
+    },
+    {
+      name : "KC_DB_SCHEMA"
+      value : aws_db_instance.keycloack.db_name
+    },
+    {
+      name : "KC_DB_URL_HOST"
+      value : aws_db_instance.keycloack.address
+    },
+    {
+      name : "KC_DB_URL_PORT"
+      value : aws_db_instance.keycloack.port
+    },
+    {
+      name : "KC_DB_USERNAME"
+      value : jsondecode(aws_secretsmanager_secret_version.keycloack_service.secret_string)["username"]
     }
   ]
 }
