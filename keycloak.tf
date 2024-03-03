@@ -54,6 +54,10 @@ module "keycloak" {
       value : random_password.keycloak_admin_password.result
     },
     {
+      name : "KC_PROXY"
+      value : "edge"
+    },
+    {
       name : "KC_HOSTNAME"
       value : "auth.${module.infrahouse_com.infrahouse_zone_name}"
     },
