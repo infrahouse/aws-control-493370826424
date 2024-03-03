@@ -71,7 +71,7 @@ module "keycloak" {
     },
     {
       name : "KC_HOSTNAME_ADMIN_URL"
-      value : "https://auth.${module.infrahouse_com.infrahouse_zone_name}/admin"
+      value : "https://auth.${module.infrahouse_com.infrahouse_zone_name}"
     }
   ]
 }
