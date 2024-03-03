@@ -68,6 +68,10 @@ module "keycloak" {
     {
       name : "KC_HTTPS_PORT"
       value : 443
+    },
+    {
+      name : "KC_HOSTNAME_ADMIN_URL"
+      value : "https://auth.${module.infrahouse_com.infrahouse_zone_name}/admin"
     }
   ]
 }
