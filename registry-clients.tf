@@ -1,6 +1,24 @@
 ### IAM roles that can upload to the registry
 locals {
-  terraform_modules = ["terraform-aws-cloud-init"]
+  terraform_modules = [
+    "terraform-aws-ci-cd",
+    "terraform-aws-cloud-init",
+    "terraform-aws-debian-repo",
+    "terraform-aws-ecs",
+    "terraform-aws-elasticsearch",
+    "terraform-aws-gh-identity-provider",
+    "terraform-aws-gha-admin",
+    "terraform-aws-github-role",
+    "terraform-aws-instance-profile",
+    "terraform-aws-jumphost",
+    "terraform-aws-kibana",
+    "terraform-aws-pypiserver",
+    "terraform-aws-service-network",
+    "terraform-aws-state-bucket",
+    "terraform-aws-state-manager",
+    "terraform-aws-update-dns",
+    "terraform-aws-website-pod"
+  ]
 }
 module "registry-client-roles" {
   source      = "git::https://github.com/infrahouse/terraform-aws-github-role.git?ref=1.1.0"
