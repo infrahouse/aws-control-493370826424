@@ -16,12 +16,14 @@ locals {
     "terraform-aws-service-network",
     "terraform-aws-state-bucket",
     "terraform-aws-state-manager",
+    "terraform-aws-tags-override",
     "terraform-aws-update-dns",
     "terraform-aws-website-pod"
   ]
 }
 module "registry-client-roles" {
-  source      = "git::https://github.com/infrahouse/terraform-aws-github-role.git?ref=1.1.0"
+  source      = "registry.infrahouse.com/infrahouse/github-role/aws"
+  version     = "~> 1.1"
   for_each    = toset(local.terraform_modules)
   gh_org_name = "infrahouse"
   repo_name   = each.key
