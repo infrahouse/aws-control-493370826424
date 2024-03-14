@@ -1,10 +1,12 @@
 module "ecs" {
-  source = "git::https://github.com/infrahouse/terraform-aws-ecs.git?ref=2.6.1"
+  source  = "registry.infrahouse.com/infrahouse/ecs/aws"
+  version = "~> 2.8"
   providers = {
     aws     = aws.aws-493370826424-uw1
     aws.dns = aws.aws-493370826424-uw1
   }
   asg_subnets = module.management.subnet_private_ids
+  ami_id      = "ami-0c535e24abbf12738"
   dns_names = [
     "registry"
   ]
