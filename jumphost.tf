@@ -16,6 +16,7 @@ module "jumphost" {
     aws = aws.aws-493370826424-uw1
   }
   keypair_name    = aws_key_pair.aleks.key_name
+  ami_id          = "ami-0546f03a1422930ff"
   subnet_ids      = module.management.subnet_private_ids
   nlb_subnet_ids  = module.management.subnet_public_ids
   environment     = var.environment
