@@ -12,6 +12,7 @@ locals {
     "terraform-aws-instance-profile",
     "terraform-aws-jumphost",
     "terraform-aws-kibana",
+    "terraform-aws-postfix",
     "terraform-aws-pypiserver",
     "terraform-aws-service-network",
     "terraform-aws-state-bucket",
