@@ -23,7 +23,7 @@ module "jumphost" {
   route53_zone_id = module.infrahouse_com.infrahouse_zone_id
   extra_policies = {
     (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
-    #    (aws_iam_policy.github_runner_permissions.name) : aws_iam_policy.github_runner_permissions.arn
+    (aws_iam_policy.github_runner_permissions.name) : aws_iam_policy.github_runner_permissions.arn
   }
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   packages = [
