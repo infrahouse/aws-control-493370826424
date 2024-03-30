@@ -25,8 +25,8 @@ module "jumphost" {
   asg_max_size    = 1
   asg_min_size    = 1
   extra_policies = {
-    (aws_iam_policy.package-publisher.name) : aws_iam_policy.package-publisher.arn
-    (aws_iam_policy.gha-runner.name) : aws_iam_policy.gha-runner.arn
+    package-publisher : aws_iam_policy.package-publisher.arn
+    gha-runner : aws_iam_policy.gha-runner.arn
   }
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   packages = [
