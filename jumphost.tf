@@ -28,11 +28,11 @@ module "jumphost" {
   packages = [
     "infrahouse-puppet-data"
   ]
-  #  extra_files = [
-  #    {
-  #      content : "export GITHUB_TOKEN="
-  #      path : "/etc/profile.d/github.sh"
-  #      permissions : "0600"
-  #    }
-  #  ]
+  extra_files = [
+    {
+      content : "export GITHUB_TOKEN=${data.aws_secretsmanager_secret_version.github_token.secret_string}"
+      path : "/etc/profile.d/github.sh"
+      permissions : "0600"
+    }
+  ]
 }
