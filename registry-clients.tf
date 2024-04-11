@@ -1,6 +1,7 @@
 ### IAM roles that can upload to the registry
 locals {
   terraform_modules = [
+    "terraform-aws-actions-runner",
     "terraform-aws-ci-cd",
     "terraform-aws-cloud-init",
     "terraform-aws-debian-repo",
