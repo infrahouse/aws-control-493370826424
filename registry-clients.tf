@@ -2,6 +2,7 @@
 locals {
   terraform_modules = [
     "terraform-aws-actions-runner",
+    "terraform-aws-bookstack",
     "terraform-aws-ci-cd",
     "terraform-aws-cloud-init",
     "terraform-aws-debian-repo",
