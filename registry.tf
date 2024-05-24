@@ -10,7 +10,7 @@ module "ecs" {
   dns_names = [
     "registry"
   ]
-  docker_image                          = "pacovk/tapir:0.6.0"
+  docker_image                          = "pacovk/tapir:0.7.0"
   internet_gateway_id                   = module.management.internet_gateway_id
   load_balancer_subnets                 = module.management.subnet_public_ids
   service_name                          = "terraform-registry"
