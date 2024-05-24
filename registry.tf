@@ -85,3 +85,12 @@ data "aws_secretsmanager_secret_version" "registry_client_secret" {
 resource "aws_s3_bucket" "terraform-registry" {
   bucket_prefix = "infrahouse-terraform-registry-"
 }
+
+resource "aws_s3_bucket_public_access_block" "terraform-registry" {
+  bucket = aws_s3_bucket.terraform-registry.bucket
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
