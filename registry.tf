@@ -63,7 +63,7 @@ module "ecs" {
     },
     {
       name : "JAVA_OPTS"
-      value : "-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus.http.cors=true -Dquarkus.http.cors.origins=https://registry.${module.infrahouse_com.infrahouse_zone_name}"
+      value : "-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus.http.cors=false"
     }
   ]
   task_role_arn = aws_iam_role.registry-node.arn
