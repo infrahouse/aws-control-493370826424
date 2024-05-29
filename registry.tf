@@ -16,7 +16,8 @@ module "ecs" {
   service_name                          = "terraform-registry"
   ssh_key_name                          = aws_key_pair.aleks-Black-MBP.key_name
   zone_id                               = module.infrahouse_com.infrahouse_zone_id
-  asg_max_size                          = 2
+  asg_max_size                          = 1
+  asg_min_size                          = 1
   alb_healthcheck_interval              = 300
   alb_healthcheck_path                  = "/"
   alb_healthcheck_response_code_matcher = "302"
@@ -60,11 +61,10 @@ module "ecs" {
     {
       name : "REGISTRY_PORT"
       value : 443
-    },
-    {
-      name : "JAVA_OPTS"
-      value : "-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus.http.cors=true -Dquarkus.http.cors.headers=origin,accept,authorization,content-type,x-requested-with -Dquarkus.http.cors.origins=https://registry.infrahouse.com -D﻿quarkus.log.level=DEBUG"
     }
+  ]
+  container_command = [
+    "-Dquarkus.http.host=0.0.0.0", "-Dquarkus.http.cors=true", "-Dquarkus.http.cors.origins=https://registry.infrahouse.com", "-jar", "/tf/registry/tapir.jar"
   ]
   task_role_arn = aws_iam_role.registry-node.arn
 }
