@@ -16,6 +16,7 @@ locals {
     "terraform-aws-kibana",
     "terraform-aws-postfix",
     "terraform-aws-pypiserver",
+    "terraform-aws-secret",
     "terraform-aws-service-network",
     "terraform-aws-state-bucket",
     "terraform-aws-state-manager",
