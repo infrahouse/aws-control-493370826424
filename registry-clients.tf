@@ -17,6 +17,7 @@ locals {
     "terraform-aws-postfix",
     "terraform-aws-pypiserver",
     "terraform-aws-secret",
+    "terraform-aws-secret-policy",
     "terraform-aws-service-network",
     "terraform-aws-state-bucket",
     "terraform-aws-state-manager",
