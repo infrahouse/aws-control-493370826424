@@ -14,6 +14,7 @@ locals {
     "terraform-aws-instance-profile",
     "terraform-aws-jumphost",
     "terraform-aws-kibana",
+    "terraform-aws-openvpn",
     "terraform-aws-postfix",
     "terraform-aws-pypiserver",
     "terraform-aws-secret",
