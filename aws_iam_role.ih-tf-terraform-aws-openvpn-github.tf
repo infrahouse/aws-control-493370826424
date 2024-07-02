@@ -5,6 +5,7 @@ data "aws_iam_policy_document" "openvpn-github-permissions" {
   statement {
     actions = [
       "ecr-public:GetAuthorizationToken",
+      "sts:GetServiceBearerToken",
     ]
     resources = ["*"]
   }
