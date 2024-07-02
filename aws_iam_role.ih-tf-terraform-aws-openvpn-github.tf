@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "openvpn-github-permissions" {
     resources = ["*"]
   }
   statement {
-    actions = ["ecr:*"]
+    actions = ["ecr-public:*"]
     resources = [
       aws_ecrpublic_repository.openvpn-portal.arn
     ]
