@@ -5,8 +5,9 @@ module "vpn" {
     aws     = aws
     aws.dns = aws
   }
-  backend_subnet_ids         = module.management.subnet_private_ids
-  lb_subnet_ids              = module.management.subnet_public_ids
-  google_oauth_client_writer = "arn:aws:iam::990466748045:user/aleks"
-  zone_id                    = module.infrahouse_com.infrahouse_zone_id
+  backend_subnet_ids           = module.management.subnet_private_ids
+  lb_subnet_ids                = module.management.subnet_public_ids
+  google_oauth_client_writer   = "arn:aws:iam::990466748045:user/aleks"
+  zone_id                      = module.infrahouse_com.infrahouse_zone_id
+  alb_access_log_force_destroy = true
 }
