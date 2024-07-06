@@ -43,7 +43,8 @@ module "keycloak" {
   container_command             = ["start"]
   alb_healthcheck_path          = "/health"
   asg_instance_type             = "t3.small"
-  asg_max_size                  = 2
+  asg_min_size                  = 1
+  asg_max_size                  = 1
   alb_healthcheck_interval      = 60
   container_memory              = "512"
   task_environment_variables = [
