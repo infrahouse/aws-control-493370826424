@@ -1,6 +1,6 @@
 module "mail_twindb_com" {
   source                   = "registry.infrahouse.com/infrahouse/postfix/aws"
-  version                  = "~> 0.1"
+  version                  = "~> 0.3"
   environment              = var.environment
   keypair_name             = aws_key_pair.aleks.key_name
   asg_max_size             = 1
@@ -13,4 +13,9 @@ module "mail_twindb_com" {
   packages = [
     "infrahouse-puppet-data"
   ]
+  puppet_custom_facts = {
+    postfix : {
+      smtp_credentials : module.smtp_credentials.secret_name
+    }
+  }
 }
