@@ -3,11 +3,10 @@ resource "aws_ses_domain_identity" "ses_domain" {
 }
 
 resource "aws_route53_record" "amazonses_verification_record" {
-  provider = aws.aws-root-uw1
-  zone_id  = aws_route53_zone.twindb_com.zone_id
-  name     = "_amazonses.${aws_route53_zone.twindb_com.name}"
-  type     = "TXT"
-  ttl      = "600"
+  zone_id = aws_route53_zone.twindb_com.zone_id
+  name    = "_amazonses.${aws_route53_zone.twindb_com.name}"
+  type    = "TXT"
+  ttl     = "600"
   records = [
     aws_ses_domain_identity.ses_domain.verification_token
   ]
