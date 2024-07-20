@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="InfraHouse Ubuntu Packages Repository">
+    <style>
+        pre {
+            display: block;
+            font-family: monospace;
+            white-space: pre;
+            border-style: dotted;
+            margin: 30px;
+            padding: 10px;
+        }
+    </style>
+    <title>InfraHouse Ubuntu Packages Repository</title>
+<body>
+<h1>Installation instructions</h1>
+
+<p>Download the repository public key and convert it into apt compatible format.</p>
+<pre>
+# Install dependencies
+apt-get update
+apt-get install gpg lsb-release curl
+
+# Add a GPG public key to verify InfraHouse packages
+mkdir -p /etc/apt/cloud-init.gpg.d/
+curl  -fsSL https://release-$(lsb_release -cs).infrahouse.com/DEB-GPG-KEY-release-$(lsb_release -cs).infrahouse.com \
+    | gpg --dearmor -o /etc/apt/cloud-init.gpg.d/infrahouse.gpg
+</pre>
+
+<p>Add the InfraHouse repository source.</p>
+
+<pre>
+echo "deb [signed-by=/etc/apt/cloud-init.gpg.d/infrahouse.gpg] https://release-$(lsb_release -cs).infrahouse.com/ $(lsb_release -cs) main" \
+    > /etc/apt/sources.list.d/infrahouse.list
+
+apt-get update
+</pre>
+</body>
