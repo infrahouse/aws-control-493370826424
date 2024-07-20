@@ -18,7 +18,3 @@ module "vpn" {
     }
   ]
 }
-
-data "aws_iam_role" "AWSAdministratorAccess" {
-  name = "AWSReservedSSO_AWSAdministratorAccess_a84a03e62f490b50"
-}
