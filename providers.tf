@@ -2,7 +2,7 @@
 provider "aws" {
   region = "us-west-1"
   assume_role {
-    role_arn = "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
+    role_arn = local.terraform_admin_role_arn
   }
   default_tags {
     tags = {
@@ -16,7 +16,7 @@ provider "aws" {
   alias  = "aws-493370826424-uw1"
   region = "us-west-1"
   assume_role {
-    role_arn = "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
+    role_arn = local.terraform_admin_role_arn
   }
   default_tags {
     tags = {
@@ -30,7 +30,7 @@ provider "aws" {
   alias  = "aws-493370826424-ue1"
   region = "us-east-1"
   assume_role {
-    role_arn = "arn:aws:iam::493370826424:role/ih-tf-aws-control-493370826424-admin"
+    role_arn = local.terraform_admin_role_arn
   }
   default_tags {
     tags = {

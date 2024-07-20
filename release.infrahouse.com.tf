@@ -1,6 +1,6 @@
 locals {
   supported_codenames = [
-    "focal", "jammy"
+    "focal", "jammy", "noble"
   ]
   index_body = file("./files/releases.html")
 }
@@ -25,6 +25,7 @@ module "release_infrahouse_com" {
     module.infrahouse-puppet-data-github.github_role_arn,
     module.puppet-code-github.github_role_arn,
     module.infrahouse-toolkit-github.github_role_arn,
-    module.jumphost.jumphost_role_arn
+    module.jumphost.jumphost_role_arn,
+    local.terraform_admin_role_arn
   ]
 }
