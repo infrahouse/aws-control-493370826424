@@ -2,7 +2,7 @@ locals {
   supported_codenames = [
     "focal", "jammy"
   ]
-  index_body = file(".files/releases.html")
+  index_body = file("./files/releases.html")
 }
 module "release_infrahouse_com" {
   for_each = toset(local.supported_codenames)
