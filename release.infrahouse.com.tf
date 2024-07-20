@@ -2,6 +2,7 @@ locals {
   supported_codenames = [
     "focal", "jammy"
   ]
+  index_body = file(".files/releases.html")
 }
 module "release_infrahouse_com" {
   for_each = toset(local.supported_codenames)
@@ -17,7 +18,7 @@ module "release_infrahouse_com" {
   gpg_public_key       = file("./files/DEB-GPG-KEY-infrahouse-${each.value}")
   gpg_sign_with        = "packager-${each.value}@infrahouse.com"
   index_title          = "InfraHouse Releases Repository"
-  index_body           = "Stay tuned!"
+  index_body           = local.index_body
   zone_id              = module.infrahouse_com.infrahouse_zone_id
   bucket_force_destroy = true
   bucket_admin_roles = [
