@@ -49,3 +49,7 @@ data "aws_route53_zone" "cicd-ih-com" {
   provider = aws.aws-303467602807-uw1
   zone_id  = data.terraform_remote_state.cicd.outputs.cicd-ih-com-zone-id
 }
+
+data "aws_iam_role" "AWSAdministratorAccess" {
+  name = "AWSReservedSSO_AWSAdministratorAccess_a84a03e62f490b50"
+}
