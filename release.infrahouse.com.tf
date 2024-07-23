@@ -35,6 +35,7 @@ module "release_infrahouse_com" {
   signing_key_readers = [
     module.infrahouse-toolkit-github.github_role_arn,
     module.infrahouse-puppet-data-github.github_role_arn,
+    module.puppet-code-github.github_role_arn,
     aws_iam_role.infrahouse-com-github.arn,
     module.jumphost.jumphost_role_arn,
     data.aws_iam_role.AWSAdministratorAccess.arn,
