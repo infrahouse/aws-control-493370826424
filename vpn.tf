@@ -1,6 +1,6 @@
 module "vpn" {
   source  = "registry.infrahouse.com/infrahouse/openvpn/aws"
-  version = "~> 0.2"
+  version = "~> 0.3"
   providers = {
     aws     = aws
     aws.dns = aws
@@ -12,6 +12,9 @@ module "vpn" {
   asg_max_size               = 1
   asg_min_size               = 1
   instance_type              = "t3a.nano"
+  portal_instance_type       = "t3a.nano"
+  portal_workers_count       = 1
+
   routes = [
     {
       network : cidrhost(module.management.vpc_cidr_block, 0)
