@@ -11,10 +11,15 @@ module "vpn" {
   zone_id                    = module.infrahouse_com.infrahouse_zone_id
   asg_max_size               = 1
   asg_min_size               = 1
+  instance_type              = "t3a.nano"
   routes = [
     {
       network : cidrhost(module.management.vpc_cidr_block, 0)
       netmask : cidrnetmask(module.management.vpc_cidr_block)
     }
+  ]
+  puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
+  packages = [
+    "infrahouse-puppet-data"
   ]
 }
