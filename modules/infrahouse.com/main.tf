@@ -17,22 +17,12 @@ resource "aws_route53_record" "mx" {
   ]
 }
 
-resource "aws_route53_record" "spf" {
-  name    = aws_route53_zone.infrahouse_com.name
-  type    = "SPF"
-  zone_id = aws_route53_zone.infrahouse_com.id
-  records = [
-    "v=spf1 include:_spf.google.com ~all"
-  ]
-  ttl = 3600
-}
-
 resource "aws_route53_record" "txt_spf" {
   name    = aws_route53_zone.infrahouse_com.name
   type    = "TXT"
   zone_id = aws_route53_zone.infrahouse_com.id
   records = [
-    "v=spf1 include:_spf.google.com ~all"
+    "v=spf1 include:_spf.google.com -all"
   ]
   ttl = 3600
 }
