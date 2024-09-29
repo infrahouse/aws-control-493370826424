@@ -51,9 +51,10 @@ resource "aws_iam_user_policy_attachment" "emailer" {
 
 module "smtp_credentials" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "0.5.0"
+  version            = "0.6.0"
   secret_description = "SMTP credentials for Postfix smarthost"
   secret_name_prefix = "smtp_credentials"
+  environment        = var.environment
   secret_value = jsonencode(
     {
       user : aws_iam_access_key.emailer.id,
