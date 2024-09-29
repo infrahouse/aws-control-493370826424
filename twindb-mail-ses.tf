@@ -54,6 +54,7 @@ module "smtp_credentials" {
   version            = "0.6.0"
   secret_description = "SMTP credentials for Postfix smarthost"
   secret_name_prefix = "smtp_credentials"
+  environment        = var.environment
   secret_value = jsonencode(
     {
       user : aws_iam_access_key.emailer.id,
