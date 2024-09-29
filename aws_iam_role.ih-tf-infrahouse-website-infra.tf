@@ -2,7 +2,7 @@
 
 module "ih-tf-infrahouse-website-infra-admin" {
   source  = "infrahouse/gha-admin/aws"
-  version = "~> 1.0"
+  version = "~> 3.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
