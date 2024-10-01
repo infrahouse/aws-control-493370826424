@@ -1,6 +1,6 @@
 module "ecs" {
   source  = "registry.infrahouse.com/infrahouse/ecs/aws"
-  version = "~> 2.8"
+  version = "~> 3.0"
   providers = {
     aws     = aws.aws-493370826424-uw1
     aws.dns = aws.aws-493370826424-uw1
