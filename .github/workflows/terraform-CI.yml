@@ -38,9 +38,15 @@ jobs:
           role-session-name: github-action-aws-control-493370826424-ci
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      # Install the latest version of Terraform CLI
+      - name: Set Terraform version
+        id: "terraform_version"
+        run: echo "IH_TF_VERSION=$(cat .terraform-version)" >> "$GITHUB_OUTPUT"
+
+      # Install the $IH_TF_VERSION version of Terraform CLI
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ steps.terraform_version.outputs.IH_TF_VERSION }}
 
       # Prepare Python environment
       - name: Setup Python Environment
@@ -53,7 +59,7 @@ jobs:
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state,
       # downloading modules, etc.
       - name: Terraform Init
-        run: terraform init -input=false
+        run: make init
 
       - name: Terraform Validate
         id: validate
