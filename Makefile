@@ -49,6 +49,8 @@ format:  ## Format terraform files
 
 .PHONY: init
 init:
+	echo -n "Using: "
+	terraform --version
 	terraform init
 
 .PHONY: plan

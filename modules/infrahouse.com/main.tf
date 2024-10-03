@@ -22,7 +22,8 @@ resource "aws_route53_record" "txt_spf" {
   type    = "TXT"
   zone_id = aws_route53_zone.infrahouse_com.id
   records = [
-    "v=spf1 include:_spf.google.com -all"
+    "v=spf1 include:_spf.google.com -all",
+    "google-site-verification=ytNdHWPzw0hCDu7xIF1fWtocIKbwppJoo9Pe1xoo3VE",
   ]
   ttl = 3600
 }
