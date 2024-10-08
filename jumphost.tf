@@ -27,9 +27,27 @@ module "jumphost" {
   extra_policies = {
     package-publisher : aws_iam_policy.package-publisher.arn
     gha-runner : aws_iam_policy.gha-runner.arn
+    jumphost-assume : aws_iam_policy.jumphost-assume.arn
   }
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   packages = [
     "infrahouse-puppet-data"
   ]
+}
+
+data "aws_iam_policy_document" "jumphost-assume" {
+  statement {
+    actions = [
+      "sts:AssumeRole"
+    ]
+    resources = [
+      "*"
+    ]
+  }
+}
+
+resource "aws_iam_policy" "jumphost-assume" {
+  name_prefix = "jumphost-assume"
+  description = "Allow jumphost assume roles"
+  policy      = data.aws_iam_policy_document.jumphost-assume.json
 }
