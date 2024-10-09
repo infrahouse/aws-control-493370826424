@@ -11,3 +11,11 @@ module "infrahouse-github-backup-app-key" {
     data.aws_iam_role.AWSAdministratorAccess.arn
   ]
 }
+
+module "terraform-aws-github-backup" {
+  source         = "registry.infrahouse.com/infrahouse/github-backup/aws"
+  version        = "~> 0.1"
+  app_key_secret = module.infrahouse-github-backup-app-key.secret_name
+  key_pair_name  = aws_key_pair.aleks.key_name
+  subnets        = module.management.subnet_private_ids
+}
