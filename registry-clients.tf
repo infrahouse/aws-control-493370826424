@@ -11,6 +11,7 @@ locals {
     "terraform-aws-gh-identity-provider",
     "terraform-aws-gha-admin",
     "terraform-aws-github-backup",
+    "terraform-aws-github-backup-configuration",
     "terraform-aws-github-role",
     "terraform-aws-instance-profile",
     "terraform-aws-jumphost",
