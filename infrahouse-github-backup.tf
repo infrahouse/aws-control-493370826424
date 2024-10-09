@@ -5,7 +5,7 @@ module "infrahouse-github-backup-app-key" {
   secret_name_prefix = "infrahouse-github-backup"
   environment        = var.environment
   readers = [
-    module.jumphost.jumphost_role_arn
+    "arn:aws:iam::493370826424:role/infrahouse-github-backup"
   ]
   writers = [
     data.aws_iam_role.AWSAdministratorAccess.arn
