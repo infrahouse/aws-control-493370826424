@@ -19,7 +19,7 @@ jobs:
     environment: continuous-integration
     timeout-minutes: 5
     env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -27,14 +27,6 @@ jobs:
         shell: bash
 
     steps:
-      - name: "Get token"
-        id: "app-token"
-        uses: "actions/create-github-app-token@v1"
-        with:
-          private-key: ${{ secrets.IH_GH_TF_APP_KEY }}
-          app-id: "1016363"
-          owner: "infrahouse8"
-
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,11 +69,7 @@ jobs:
       - name: Terraform Plan
         run: |
           make plan
-          ih-plan publish \
-            --github-token ${{ steps.app-token.outputs.token }} \
-            ${{ github.repository }} \
-            ${{ github.event.pull_request.number }} \
-            plan.stdout plan.stderr
+          ih-plan publish ${{ github.repository }} ${{ github.event.pull_request.number }} plan.stdout plan.stderr
 
       # Upload Terraform Plan
       - name: Upload Terraform Plan
