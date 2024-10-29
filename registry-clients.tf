@@ -5,6 +5,7 @@ locals {
     "terraform-aws-bookstack",
     "terraform-aws-ci-cd",
     "terraform-aws-cloud-init",
+    "terraform-aws-cost-alert",
     "terraform-aws-debian-repo",
     "terraform-aws-ecs",
     "terraform-aws-elasticsearch",
