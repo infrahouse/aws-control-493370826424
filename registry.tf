@@ -1,6 +1,6 @@
 module "ecs" {
   source  = "registry.infrahouse.com/infrahouse/ecs/aws"
-  version = "~> 3.0"
+  version = "3.11.0"
   providers = {
     aws     = aws.aws-493370826424-uw1
     aws.dns = aws.aws-493370826424-uw1
@@ -41,6 +41,10 @@ module "ecs" {
       value : jsondecode(
         data.aws_secretsmanager_secret_version.registry_client_secret.secret_string
       )["client_secret"]
+    },
+    {
+      name : "AWS_REGION",
+      value : data.aws_region.current.name
     },
     {
       name : "STORAGE_CONFIG"
