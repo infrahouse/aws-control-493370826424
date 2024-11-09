@@ -18,4 +18,5 @@ module "terraform-aws-github-backup" {
   app_key_secret = module.infrahouse-github-backup-app-key.secret_name
   key_pair_name  = aws_key_pair.aleks.key_name
   subnets        = module.management.subnet_private_ids
+  instance_type  = "t3a.small"
 }
