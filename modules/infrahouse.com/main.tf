@@ -37,3 +37,14 @@ resource "aws_route53_record" "txt_dkim" {
   ]
   ttl = 3600
 }
+
+resource "aws_route53_record" "_gh-infrahouse-o" {
+  name    = "_gh-infrahouse-o.${aws_route53_zone.infrahouse_com.name}"
+  type    = "TXT"
+  zone_id = aws_route53_zone.infrahouse_com.id
+  records = [
+    "4e1245e5cc"
+  ]
+  ttl = 3600
+}
+
