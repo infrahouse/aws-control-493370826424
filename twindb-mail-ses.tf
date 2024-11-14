@@ -35,6 +35,7 @@ data "aws_iam_policy_document" "emailer-permissions" {
     ]
     resources = [
       aws_ses_domain_identity.ses_domain.arn,
+      module.infrahouse_com.ses_domain_arn,
     ]
   }
 }
