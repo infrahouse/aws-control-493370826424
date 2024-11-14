@@ -14,7 +14,7 @@ module "infrahouse-github-backup-app-key" {
 
 module "terraform-aws-github-backup" {
   source                   = "registry.infrahouse.com/infrahouse/github-backup/aws"
-  version                  = "~> 0.2"
+  version                  = "~> 0.4"
   app_key_secret           = module.infrahouse-github-backup-app-key.secret_name
   key_pair_name            = aws_key_pair.aleks.key_name
   subnets                  = module.management.subnet_private_ids
@@ -24,4 +24,5 @@ module "terraform-aws-github-backup" {
   packages = [
     "infrahouse-puppet-data"
   ]
+  smtp_credentials_secret = module.smtp_credentials.secret_name
 }
