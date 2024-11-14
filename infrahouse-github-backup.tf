@@ -19,6 +19,7 @@ module "terraform-aws-github-backup" {
   key_pair_name            = aws_key_pair.aleks.key_name
   subnets                  = module.management.subnet_private_ids
   instance_type            = "t3a.small"
+  environment              = var.environment
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   packages = [
     "infrahouse-puppet-data"
