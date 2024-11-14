@@ -64,5 +64,6 @@ module "smtp_credentials" {
   readers = [
     module.jumphost.jumphost_role_arn,
     module.mail_twindb_com.instance_role_arn,
+    module.terraform-aws-github-backup.instance_role_arn,
   ]
 }
