@@ -26,6 +26,7 @@ locals {
     "terraform-aws-state-bucket",
     "terraform-aws-state-manager",
     "terraform-aws-tags-override",
+    "terraform-aws-tcp-pod",
     "terraform-aws-terraformer",
     "terraform-aws-update-dns",
     "terraform-aws-website-pod"
