@@ -12,18 +12,19 @@ resource "aws_key_pair" "aleks-Black-MBP" {
 
 module "jumphost" {
   source  = "registry.infrahouse.com/infrahouse/jumphost/aws"
-  version = "~> 2.3"
+  version = "~> 2.11"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
-  keypair_name    = aws_key_pair.aleks.key_name
-  ami_id          = "ami-0546f03a1422930ff"
-  subnet_ids      = module.management.subnet_private_ids
-  nlb_subnet_ids  = module.management.subnet_public_ids
-  environment     = var.environment
-  route53_zone_id = module.infrahouse_com.infrahouse_zone_id
-  asg_max_size    = 1
-  asg_min_size    = 1
+  keypair_name            = aws_key_pair.aleks.key_name
+  ami_id                  = "ami-0546f03a1422930ff"
+  subnet_ids              = module.management.subnet_private_ids
+  nlb_subnet_ids          = module.management.subnet_public_ids
+  environment             = var.environment
+  route53_zone_id         = module.infrahouse_com.infrahouse_zone_id
+  asg_max_size            = 1
+  asg_min_size            = 1
+  on_demand_base_capacity = 0
   extra_policies = {
     package-publisher : aws_iam_policy.package-publisher.arn
     gha-runner : aws_iam_policy.gha-runner.arn
