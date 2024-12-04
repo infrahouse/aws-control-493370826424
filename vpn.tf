@@ -1,6 +1,6 @@
 module "vpn" {
   source  = "registry.infrahouse.com/infrahouse/openvpn/aws"
-  version = "~> 0.7"
+  version = "0.7.1"
   providers = {
     aws     = aws
     aws.dns = aws
