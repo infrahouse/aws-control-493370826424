@@ -23,7 +23,7 @@ resource "aws_secretsmanager_secret_version" "keycloak_admin_creds" {
 
 module "keycloak" {
   source  = "registry.infrahouse.com/infrahouse/ecs/aws"
-  version = "3.11.0"
+  version = "3.14.0"
   providers = {
     aws     = aws.aws-493370826424-uw1
     aws.dns = aws.aws-493370826424-uw1
@@ -45,6 +45,7 @@ module "keycloak" {
   asg_instance_type             = "t3.small"
   asg_min_size                  = 1
   asg_max_size                  = 1
+  on_demand_base_capacity       = 0
   alb_healthcheck_interval      = 60
   container_memory              = "512"
   task_environment_variables = [
