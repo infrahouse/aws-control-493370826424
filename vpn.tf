@@ -12,7 +12,7 @@ module "vpn" {
   asg_max_size               = 1
   asg_min_size               = 1
   on_demand_base_capacity    = 0
-  instance_type              = "t3a.nano"
+  instance_type              = "t3a.micro"
   portal_instance_type       = "t3a.nano"
   portal_workers_count       = 1
 
