@@ -1,6 +1,6 @@
 module "vpn" {
   source  = "registry.infrahouse.com/infrahouse/openvpn/aws"
-  version = "~> 0.6"
+  version = "~> 0.7"
   providers = {
     aws     = aws
     aws.dns = aws
@@ -11,6 +11,7 @@ module "vpn" {
   zone_id                    = module.infrahouse_com.infrahouse_zone_id
   asg_max_size               = 1
   asg_min_size               = 1
+  on_demand_base_capacity    = 0
   instance_type              = "t3a.nano"
   portal_instance_type       = "t3a.nano"
   portal_workers_count       = 1
