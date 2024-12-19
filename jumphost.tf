@@ -27,7 +27,6 @@ module "jumphost" {
   on_demand_base_capacity = 0
   extra_policies = {
     package-publisher : aws_iam_policy.package-publisher.arn
-    gha-runner : aws_iam_policy.gha-runner.arn
     jumphost-assume : aws_iam_policy.jumphost-assume.arn
   }
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
