@@ -1,6 +1,6 @@
 locals {
   supported_codenames = [
-    "focal", "jammy", "noble"
+    "focal", "jammy", "noble", "oracular"
   ]
   index_body = file("./files/releases.html")
 }
