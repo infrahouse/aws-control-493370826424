@@ -40,6 +40,8 @@ module "release_infrahouse_com" {
     module.infrahouse-toolkit-github.github_role_arn,
     aws_iam_role.infrahouse-com-github.arn,
     module.jumphost.jumphost_role_arn,
+  ]
+  signing_key_writers = [
     data.aws_iam_role.AWSAdministratorAccess.arn,
   ]
 }
