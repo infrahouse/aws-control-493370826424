@@ -28,6 +28,7 @@ locals {
     "terraform-aws-tags-override",
     "terraform-aws-tcp-pod",
     "terraform-aws-terraformer",
+    "terraform-aws-truststore",
     "terraform-aws-update-dns",
     "terraform-aws-website-pod"
   ]
