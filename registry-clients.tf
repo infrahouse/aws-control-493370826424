@@ -4,6 +4,7 @@ locals {
     "terraform-aws-actions-runner",
     "terraform-aws-bookstack",
     "terraform-aws-ci-cd",
+    "terraform-aws-cloudcraft-role",
     "terraform-aws-cloud-init",
     "terraform-aws-cost-alert",
     "terraform-aws-debian-repo",
