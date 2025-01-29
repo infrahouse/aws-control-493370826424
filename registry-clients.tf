@@ -8,6 +8,7 @@ locals {
     "terraform-aws-cloud-init",
     "terraform-aws-cost-alert",
     "terraform-aws-debian-repo",
+    "terraform-aws-ecr",
     "terraform-aws-ecs",
     "terraform-aws-elasticsearch",
     "terraform-aws-gh-identity-provider",
