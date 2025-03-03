@@ -24,6 +24,13 @@ data "aws_iam_policy_document" "infrahouse-com-github-assume" {
         "repo:infrahouse/infrahouse-com:ref:refs/heads/main"
       ]
     }
+    condition {
+      test     = "StringLike"
+      variable = "token.actions.githubusercontent.com:sub"
+      values = [
+        "repo:infrahouse/infrahouse-com:*"
+      ]
+    }
   }
 }
 
