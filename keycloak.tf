@@ -29,7 +29,12 @@ module "keycloak" {
     aws.dns = aws.aws-493370826424-uw1
   }
   asg_subnets = module.management.subnet_private_ids
-  ami_id      = "ami-0c535e24abbf12738"
+
+  # Only AMI, no name mentioned
+  # amiFilter=[{"Name":"name","Values":["amzn2-ami-ecs-hvm-*"]},{"Name":"architecture","Values":["x86_64"]},{"Name":"virtualization-type","Values":["hvm"]}]
+  # currentImageName=unknown
+  ami_id = "ami-0c535e24abbf12738"
+
   dns_names = [
     "auth"
   ]
