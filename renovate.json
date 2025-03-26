@@ -14,5 +14,11 @@
     "datasourceTemplate": "aws-machine-image",
     "versioningTemplate": "aws-machine-image"
   }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["aws-machine-image"],
+      "patch": { "enabled": true }
+    }
   ]
 }
