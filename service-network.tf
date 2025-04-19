@@ -1,6 +1,6 @@
 module "management" {
   source  = "infrahouse/service-network/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
