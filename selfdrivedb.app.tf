@@ -19,7 +19,7 @@ resource "aws_iam_user" "ha" {
 data "aws_iam_policy_document" "ha-permissions" {
   statement {
     resources = [
-      aws_route53_zone.selfdrivedb_app.id
+      aws_route53_zone.selfdrivedb_app.arn
     ]
     actions = [
       "route53:*"
