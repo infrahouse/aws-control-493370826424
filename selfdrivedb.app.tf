@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "ha-permissions" {
   statement {
     resources = ["*"]
     actions = [
-      "route53:ListHostedZonesByName"
+      "route53:ListHostedZones"
     ]
   }
 }
