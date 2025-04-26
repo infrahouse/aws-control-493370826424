@@ -18,11 +18,25 @@ resource "aws_iam_user" "ha" {
 
 data "aws_iam_policy_document" "ha-permissions" {
   statement {
-    resources = [
-      aws_route53_zone.selfdrivedb_app.arn
-    ]
+    actions   = ["route53:GetChange"]
+    resources = ["arn:aws:route53:::change/*"]
+  }
+  statement {
     actions = [
-      "route53:*"
+      "route53:ChangeResourceRecordSets",
+      "route53:ListResourceRecordSets"
+    ]
+    resources = [aws_route53_zone.selfdrivedb_app.arn]
+    condition {
+      test     = "ForAllValues:StringEquals"
+      values   = ["TXT"]
+      variable = "route53:ChangeResourceRecordSetsRecordTypes"
+    }
+  }
+  statement {
+    resources = ["*"]
+    actions = [
+      "route53:ListHostedZonesByName"
     ]
   }
 }
