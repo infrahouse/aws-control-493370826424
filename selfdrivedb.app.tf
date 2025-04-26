@@ -11,3 +11,33 @@ resource "aws_route53_record" "ha" {
     "192.168.1.219"
   ]
 }
+
+resource "aws_iam_user" "ha" {
+  name = "home-assitant"
+}
+
+data "aws_iam_policy_document" "ha-permissions" {
+  statement {
+    resources = [
+      aws_route53_zone.selfdrivedb_app.id
+    ]
+    actions = [
+      "route53:*"
+    ]
+  }
+}
+
+resource "aws_iam_policy" "ha-permissions" {
+  name_prefix = "ha-permissions-"
+  description = "Permissions for Home Assistant"
+  policy      = data.aws_iam_policy_document.ha-permissions.json
+}
+
+resource "aws_iam_user_policy_attachment" "ha" {
+  policy_arn = aws_iam_policy.ha-permissions.arn
+  user       = aws_iam_user.ha.name
+}
+
+resource "aws_iam_access_key" "ha" {
+  user = aws_iam_user.ha.name
+}
