@@ -21,6 +21,7 @@ module "terraform-aws-github-backup" {
   instance_type            = "t3a.micro"
   environment              = var.environment
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
+  root_volume_size         = 60
   packages = [
     "infrahouse-puppet-data"
   ]
