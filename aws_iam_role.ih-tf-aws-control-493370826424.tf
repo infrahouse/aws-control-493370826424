@@ -11,6 +11,7 @@ module "ih-tf-aws-control-493370826424-admin" {
   repo_name                = "aws-control-493370826424"
   state_bucket             = "infrahouse-aws-control-493370826424"
   admin_allowed_arns = [
-    "arn:aws:iam::990466748045:user/aleks"
+    "arn:aws:iam::990466748045:user/aleks",
+    "arn:aws:iam::303467602807:role/ih-tf-github-control-github"
   ]
 }
