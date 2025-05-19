@@ -12,7 +12,7 @@ resource "aws_key_pair" "aleks-Black-MBP" {
 
 module "jumphost" {
   source  = "registry.infrahouse.com/infrahouse/jumphost/aws"
-  version = "~> 2.11"
+  version = "2.15.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
