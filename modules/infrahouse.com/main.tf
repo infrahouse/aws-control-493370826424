@@ -48,3 +48,13 @@ resource "aws_route53_record" "_gh-infrahouse-o" {
   ttl = 3600
 }
 
+
+resource "aws_route53_record" "linear" {
+  name    = aws_route53_zone.infrahouse_com.name
+  type    = "TXT"
+  zone_id = aws_route53_zone.infrahouse_com.id
+  records = [
+    "linear-domain-verification=cmuvndqiug94"
+  ]
+  ttl = 3600
+}
