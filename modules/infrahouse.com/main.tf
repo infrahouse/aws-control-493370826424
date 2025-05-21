@@ -24,6 +24,7 @@ resource "aws_route53_record" "txt_spf" {
   records = [
     "v=spf1 include:_spf.google.com -all",
     "google-site-verification=ytNdHWPzw0hCDu7xIF1fWtocIKbwppJoo9Pe1xoo3VE",
+    "linear-domain-verification=cmuvndqiug94"
   ]
   ttl = 3600
 }
@@ -44,17 +45,6 @@ resource "aws_route53_record" "_gh-infrahouse-o" {
   zone_id = aws_route53_zone.infrahouse_com.id
   records = [
     "4e1245e5cc"
-  ]
-  ttl = 3600
-}
-
-
-resource "aws_route53_record" "linear" {
-  name    = aws_route53_zone.infrahouse_com.name
-  type    = "TXT"
-  zone_id = aws_route53_zone.infrahouse_com.id
-  records = [
-    "linear-domain-verification=cmuvndqiug94"
   ]
   ttl = 3600
 }
