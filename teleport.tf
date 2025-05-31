@@ -1,6 +1,6 @@
 module "teleport" {
   source              = "registry.infrahouse.com/infrahouse/teleport/aws"
-  version             = "0.2.1"
+  version             = "0.2.2"
   backend_subnet_ids  = module.management.subnet_private_ids
   environment         = var.environment
   frontend_subnet_ids = module.management.subnet_public_ids
