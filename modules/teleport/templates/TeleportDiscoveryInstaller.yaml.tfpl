@@ -1,0 +1,24 @@
+---
+schemaVersion: '2.2'
+description: aws:runShellScript
+parameters:
+  token:
+    type: String
+    description: "(Required) The Teleport invite token to use when joining the cluster."
+  scriptName:
+    type: String
+    description: "(Required) The Teleport installer script to use when joining the cluster."
+mainSteps:
+  - action: aws:downloadContent
+    name: downloadContent
+    inputs:
+      sourceType: "HTTP"
+      destinationPath: "/tmp/installTeleport.sh"
+      sourceInfo:
+        url: "https://${teleport_host}:443/webapi/scripts/installer/{{ scriptName }}"
+  - action: aws:runShellScript
+    name: runShellScript
+    inputs:
+      timeoutSeconds: '300'
+      runCommand:
+        - /bin/sh /tmp/installTeleport.sh "{{ token }}"
