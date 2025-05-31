@@ -15,6 +15,8 @@ resource "aws_db_instance" "keycloak" {
   vpc_security_group_ids = [
     aws_security_group.keycloak.id
   ]
+  iam_database_authentication_enabled = true
+  apply_immediately                   = true
 }
 
 resource "aws_db_subnet_group" "keycloak" {
