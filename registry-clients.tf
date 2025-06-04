@@ -18,6 +18,7 @@ locals {
     "terraform-aws-github-backup-configuration",
     "terraform-aws-github-role",
     "terraform-aws-guardduty-configuration",
+    "terraform-aws-iso27001",
     "terraform-aws-instance-profile",
     "terraform-aws-jumphost",
     "terraform-aws-kibana",
