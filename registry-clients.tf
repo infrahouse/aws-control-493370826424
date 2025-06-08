@@ -29,6 +29,7 @@ locals {
     "terraform-aws-secret-policy",
     "terraform-aws-service-network",
     "terraform-aws-state-bucket",
+    "terraform-aws-sqs-ecs",
     "terraform-aws-sqs-pod",
     "terraform-aws-state-manager",
     "terraform-aws-tags-override",
