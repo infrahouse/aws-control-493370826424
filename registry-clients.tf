@@ -35,6 +35,7 @@ locals {
     "terraform-aws-tags-override",
     "terraform-aws-tcp-pod",
     "terraform-aws-teleport",
+    "terraform-aws-teleport-agent",
     "terraform-aws-terraformer",
     "terraform-aws-truststore",
     "terraform-aws-update-dns",
