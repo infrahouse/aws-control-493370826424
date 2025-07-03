@@ -12,6 +12,7 @@ locals {
     "terraform-aws-ecr",
     "terraform-aws-ecs",
     "terraform-aws-elasticsearch",
+    "terraform-aws-emrserverless",
     "terraform-aws-gh-identity-provider",
     "terraform-aws-gha-admin",
     "terraform-aws-github-backup",
