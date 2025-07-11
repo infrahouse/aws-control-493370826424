@@ -21,6 +21,7 @@ locals {
     "terraform-aws-guardduty-configuration",
     "terraform-aws-iso27001",
     "terraform-aws-instance-profile",
+    "terraform-aws-http-redirect",
     "terraform-aws-jumphost",
     "terraform-aws-kibana",
     "terraform-aws-openvpn",
