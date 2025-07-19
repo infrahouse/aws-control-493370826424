@@ -17,7 +17,7 @@ module "terraform-aws-github-backup" {
   version                  = "0.6.4"
   app_key_secret           = module.infrahouse-github-backup-app-key.secret_name
   subnets                  = module.management.subnet_private_ids
-  instance_type            = "t3a.small"
+  instance_type            = "t3a.medium"
   environment              = var.environment
   puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
   root_volume_size         = 60
