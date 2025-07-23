@@ -14,7 +14,7 @@ module "infrahouse-github-backup-app-key" {
 
 module "terraform-aws-github-backup" {
   source                   = "registry.infrahouse.com/infrahouse/github-backup/aws"
-  version                  = "0.6.4"
+  version                  = "0.7.1"
   app_key_secret           = module.infrahouse-github-backup-app-key.secret_name
   subnets                  = module.management.subnet_private_ids
   instance_type            = "t3a.large"
