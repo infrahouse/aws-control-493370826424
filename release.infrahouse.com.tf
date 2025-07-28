@@ -11,7 +11,7 @@ module "release_infrahouse_com" {
     aws.ue1 = aws.aws-493370826424-ue1
   }
   source                = "registry.infrahouse.com/infrahouse/debian-repo/aws"
-  version               = "3.0.0"
+  version               = "3.0.1"
   bucket_name           = "infrahouse-release-${each.value}"
   repository_codename   = each.value
   package_version_limit = 0
