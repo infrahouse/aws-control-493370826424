@@ -23,6 +23,7 @@ locals {
     "terraform-aws-instance-profile",
     "terraform-aws-http-redirect",
     "terraform-aws-jumphost",
+    "terraform-aws-key",
     "terraform-aws-kibana",
     "terraform-aws-openvpn",
     "terraform-aws-postfix",
