@@ -1,6 +1,6 @@
 module "mail_twindb_com" {
   source                   = "registry.infrahouse.com/infrahouse/postfix/aws"
-  version                  = "0.4.0"
+  version                  = "0.5.0"
   environment              = var.environment
   keypair_name             = aws_key_pair.aleks.key_name
   asg_max_size             = 1
