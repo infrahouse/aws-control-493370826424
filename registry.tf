@@ -16,8 +16,9 @@ module "ecs" {
   service_name                          = "terraform-registry"
   ssh_key_name                          = aws_key_pair.aleks-Black-MBP.key_name
   zone_id                               = module.infrahouse_com.infrahouse_zone_id
-  asg_max_size                          = 1
-  asg_min_size                          = 1
+  asg_max_size                          = 2
+  asg_min_size                          = 2
+  task_min_count                        = 2
   on_demand_base_capacity               = 0
   alb_healthcheck_interval              = 300
   alb_healthcheck_path                  = "/"
