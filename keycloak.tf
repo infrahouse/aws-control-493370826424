@@ -15,6 +15,7 @@ module "keycloak" {
     "auth"
   ]
   docker_image                  = "quay.io/keycloak/keycloak:23.0.7"
+  ami_id                        = "ami-0b661dc3de2dae64f"
   internet_gateway_id           = module.management.internet_gateway_id
   load_balancer_subnets         = module.management.subnet_public_ids
   service_name                  = "auth"
