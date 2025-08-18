@@ -18,7 +18,7 @@ module "ecs" {
   zone_id                               = module.infrahouse_com.infrahouse_zone_id
   asg_max_size                          = 2
   asg_min_size                          = 2
-  task_min_count                        = 2
+  task_min_count                        = 4
   on_demand_base_capacity               = 0
   alb_healthcheck_interval              = 300
   alb_healthcheck_path                  = "/"
