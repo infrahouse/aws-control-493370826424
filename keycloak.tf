@@ -25,9 +25,6 @@ module "keycloak" {
   container_command             = ["start"]
   healthcheck_path              = "/health"
   asg_instance_type             = "t3.small"
-  asg_min_size                  = 1
-  asg_max_size                  = 1
-  task_min_count                = 1
   on_demand_base_capacity       = 0
   healthcheck_interval          = 60
   container_memory              = "512"
