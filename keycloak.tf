@@ -5,7 +5,7 @@ resource "random_password" "keycloak_admin_password" {
 
 module "keycloak" {
   source  = "registry.infrahouse.com/infrahouse/ecs/aws"
-  version = "5.8.2"
+  version = "5.9.1"
   providers = {
     aws     = aws.aws-493370826424-uw1
     aws.dns = aws.aws-493370826424-uw1
