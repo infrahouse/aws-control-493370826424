@@ -94,7 +94,7 @@ module "keycloak" {
 
 module "keycloak_admin_password" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  version            = "1.1.0"
   secret_description = "Keycloak admin password"
   secret_name_prefix = "keycloak_admin_password"
   environment        = var.environment
@@ -106,7 +106,7 @@ module "keycloak_admin_password" {
 
 module "kc_db_password" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  version            = "1.1.0"
   secret_description = "Keycloak DB password"
   secret_name_prefix = "keycloak_db_password"
   secret_value       = random_password.keycloak_service.result
