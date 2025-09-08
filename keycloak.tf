@@ -5,7 +5,7 @@ resource "random_password" "keycloak_admin_password" {
 
 module "keycloak" {
   source  = "registry.infrahouse.com/infrahouse/ecs/aws"
-  version = "5.8.2"
+  version = "5.9.1"
   providers = {
     aws     = aws.aws-493370826424-uw1
     aws.dns = aws.aws-493370826424-uw1
@@ -15,6 +15,7 @@ module "keycloak" {
     "auth"
   ]
   docker_image                  = "quay.io/keycloak/keycloak:23.0.7"
+  ami_id                        = "ami-0b661dc3de2dae64f"
   internet_gateway_id           = module.management.internet_gateway_id
   load_balancer_subnets         = module.management.subnet_public_ids
   service_name                  = "auth"
@@ -24,8 +25,8 @@ module "keycloak" {
   container_command             = ["start"]
   healthcheck_path              = "/health"
   asg_instance_type             = "t3.small"
-  asg_min_size                  = 1
-  asg_max_size                  = 1
+  task_min_count                = 1
+  task_max_count                = 1
   on_demand_base_capacity       = 0
   healthcheck_interval          = 60
   container_memory              = "512"
@@ -93,7 +94,7 @@ module "keycloak" {
 
 module "keycloak_admin_password" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  version            = "1.1.0"
   secret_description = "Keycloak admin password"
   secret_name_prefix = "keycloak_admin_password"
   environment        = var.environment
@@ -105,7 +106,7 @@ module "keycloak_admin_password" {
 
 module "kc_db_password" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  version            = "1.1.0"
   secret_description = "Keycloak DB password"
   secret_name_prefix = "keycloak_db_password"
   secret_value       = random_password.keycloak_service.result

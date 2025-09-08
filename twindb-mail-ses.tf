@@ -52,7 +52,7 @@ resource "aws_iam_user_policy_attachment" "emailer" {
 
 module "smtp_credentials" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
-  version            = "1.0.1"
+  version            = "1.1.0"
   secret_description = "SMTP credentials for Postfix smarthost"
   secret_name_prefix = "smtp_credentials"
   environment        = var.environment
