@@ -28,6 +28,7 @@ locals {
     "terraform-aws-openvpn",
     "terraform-aws-postfix",
     "terraform-aws-pypiserver",
+    "terraform-aws-registry",
     "terraform-aws-s3-bucket",
     "terraform-aws-secret",
     "terraform-aws-secret-policy",
