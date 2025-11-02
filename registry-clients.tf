@@ -25,6 +25,7 @@ locals {
     "terraform-aws-jumphost",
     "terraform-aws-key",
     "terraform-aws-kibana",
+    "terraform-aws-lambda-monitored",
     "terraform-aws-openvpn",
     "terraform-aws-postfix",
     "terraform-aws-pypiserver",
