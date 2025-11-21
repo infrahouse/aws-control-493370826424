@@ -27,6 +27,7 @@ locals {
     "terraform-aws-kibana",
     "terraform-aws-lambda-monitored",
     "terraform-aws-openvpn",
+    "terraform-aws-pmm-ecs",
     "terraform-aws-postfix",
     "terraform-aws-pypiserver",
     "terraform-aws-registry",
