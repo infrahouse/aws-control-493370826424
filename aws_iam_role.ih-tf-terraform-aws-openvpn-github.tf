@@ -28,5 +28,5 @@ resource "aws_iam_policy" "openvpn-github-permissions" {
 resource "aws_iam_role_policy_attachment" "openvpn-github" {
   provider   = aws.aws-493370826424-uw1
   policy_arn = aws_iam_policy.openvpn-github-permissions.arn
-  role       = module.registry-client-roles["terraform-aws-openvpn"].github_role_name
+  role       = module.registry.registry_client_role_names["terraform-aws-openvpn"]
 }
