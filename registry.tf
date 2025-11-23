@@ -8,7 +8,7 @@ module "ecs" {
   asg_subnets = module.management.subnet_private_ids
   ami_id      = "ami-0c535e24abbf12738"
   dns_names = [
-    "registry"
+    "registry-old"
   ]
   docker_image                          = "pacovk/tapir:0.7.0"
   internet_gateway_id                   = module.management.internet_gateway_id
