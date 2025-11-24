@@ -11,7 +11,8 @@ resource "aws_db_instance" "keycloak" {
   db_subnet_group_name        = aws_db_subnet_group.keycloak.name
   multi_az                    = true
   backup_retention_period     = 7
-  deletion_protection         = true
+  deletion_protection         = false
+  skip_final_snapshot         = true
   vpc_security_group_ids = [
     aws_security_group.keycloak.id
   ]
