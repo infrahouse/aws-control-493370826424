@@ -40,8 +40,7 @@ data "aws_iam_policy_document" "registry_node_permissions" {
       "s3:*",
     ]
     resources = [
-      "arn:aws:s3:::infrahouse-terraform-registry-20240303194152191400000001",
-      "arn:aws:s3:::terraform-registry-20251123172357119000000002",
+      module.registry.bucket_arn,
     ]
   }
   statement {
@@ -49,8 +48,7 @@ data "aws_iam_policy_document" "registry_node_permissions" {
       "s3:*",
     ]
     resources = [
-      "arn:aws:s3:::infrahouse-terraform-registry-20240303194152191400000001/*",
-      "arn:aws:s3:::terraform-registry-20251123172357119000000002/*"
+      "${module.registry.bucket_arn}/*",
     ]
   }
 }
