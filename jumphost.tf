@@ -1,6 +1,6 @@
 module "jumphost" {
   source  = "registry.infrahouse.com/infrahouse/jumphost/aws"
-  version = "3.2.1"
+  version = "4.5.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
