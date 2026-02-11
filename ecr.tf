@@ -23,3 +23,16 @@ resource "aws_ecrpublic_repository" "openvpn-portal" {
     usage_text        = "For usage details, check out https://registry.terraform.io/modules/infrahouse/openvpn/aws/latest"
   }
 }
+
+resource "aws_ecrpublic_repository" "github-backup" {
+  provider        = aws.aws-493370826424-ue1
+  repository_name = "github-backup"
+  catalog_data {
+    about_text        = "InfraHouse GitHub Backup"
+    architectures     = ["x86-64"]
+    description       = "InfraHouse GitHub Backup container image"
+    logo_image_blob   = filebase64("${path.module}/files/infrahouse-logo.png")
+    operating_systems = ["Linux"]
+    usage_text        = "For usage details, check out https://registry.terraform.io/modules/infrahouse/github-backup/aws/latest"
+  }
+}
