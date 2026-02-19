@@ -11,6 +11,5 @@ module "ih-tf-infrahouse-website-infra-admin" {
   repo_name                = "infrahouse-website-infra"
   state_bucket             = "infrahouse-infrahouse-website-infra"
   admin_allowed_arns = [
-    "arn:aws:iam::990466748045:user/aleks"
   ]
 }
