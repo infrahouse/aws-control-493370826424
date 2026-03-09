@@ -26,6 +26,7 @@ locals {
     "terraform-aws-key",
     "terraform-aws-kibana",
     "terraform-aws-lambda-monitored",
+    "terraform-aws-openclaw",
     "terraform-aws-openvpn",
     "terraform-aws-percona-server",
     "terraform-aws-pmm-ecs",

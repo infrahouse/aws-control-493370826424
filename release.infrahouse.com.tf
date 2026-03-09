@@ -46,5 +46,5 @@ module "release_infrahouse_com" {
   signing_key_writers = [
     data.aws_iam_role.AWSAdministratorAccess.arn,
   ]
-  environment = var.environment
+  environment = local.environment
 }
