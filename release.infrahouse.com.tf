@@ -44,7 +44,7 @@ module "release_infrahouse_com" {
     module.jumphost.jumphost_role_arn,
   ]
   signing_key_writers = [
-    data.aws_iam_role.AWSAdministratorAccess.arn,
+    local.admin_role_arn,
   ]
   environment = local.environment
 }

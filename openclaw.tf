@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "openclaw_ses" {
 
 module "openclaw" {
   source  = "registry.infrahouse.com/infrahouse/openclaw/aws"
-  version = "0.2.0"
+  version = "0.3.0"
 
   providers = {
     aws     = aws.aws-493370826424-uw1
@@ -31,6 +31,9 @@ module "openclaw" {
   extra_packages = ["gh"]
 
   extra_instance_permissions = data.aws_iam_policy_document.openclaw_ses.json
+  api_keys_writers = [
+    local.admin_role_arn
+  ]
   extra_bedrock_models = [
     {
       id   = "us.anthropic.claude-sonnet-4-6-v1:0"
