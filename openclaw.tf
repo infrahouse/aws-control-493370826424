@@ -1,3 +1,17 @@
+data "aws_iam_policy_document" "openclaw_ses" {
+  statement {
+    sid    = "SESSend"
+    effect = "Allow"
+    actions = [
+      "ses:SendEmail",
+      "ses:SendRawEmail",
+    ]
+    resources = [
+      module.infrahouse_com.ses_domain_arn,
+    ]
+  }
+}
+
 module "openclaw" {
   source  = "registry.infrahouse.com/infrahouse/openclaw/aws"
   version = "0.2.0"
@@ -15,4 +29,6 @@ module "openclaw" {
   alarm_emails   = local.alarm_emails
   cognito_users  = local.openclaw_users
   extra_packages = ["gh"]
+
+  extra_instance_permissions = data.aws_iam_policy_document.openclaw_ses.json
 }

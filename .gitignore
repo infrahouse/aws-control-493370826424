@@ -36,3 +36,5 @@ tf.plan
 /plan.stdout
 /modules/jumphost/update_dns.zip
 /.claude/*.local.json
+.claude/reviews/
+.claude/internal/
