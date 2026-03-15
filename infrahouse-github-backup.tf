@@ -8,7 +8,7 @@ module "infrahouse-github-backup-app-key" {
     "arn:aws:iam::493370826424:role/infrahouse-github-backup"
   ]
   writers = [
-    data.aws_iam_role.AWSAdministratorAccess.arn
+    local.admin_role_arn
   ]
 }
 
@@ -27,7 +27,7 @@ module "github-backup" {
   subnets        = module.management.subnet_private_ids
 
   github_app_key_secret_writers = [
-    data.aws_iam_role.AWSAdministratorAccess.arn
+    local.admin_role_arn
   ]
 
   environment = local.environment

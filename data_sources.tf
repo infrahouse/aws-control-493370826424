@@ -24,6 +24,6 @@ data "terraform_remote_state" "cicd" {
 }
 
 
-data "aws_iam_role" "AWSAdministratorAccess" {
-  name = "AWSReservedSSO_AWSAdministratorAccess_a84a03e62f490b50"
+data "aws_iam_roles" "AWSAdministratorAccess" {
+  name_regex = "AWSReservedSSO_AWSAdministratorAccess_.*"
 }
