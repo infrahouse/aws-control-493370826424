@@ -31,4 +31,10 @@ module "openclaw" {
   extra_packages = ["gh"]
 
   extra_instance_permissions = data.aws_iam_policy_document.openclaw_ses.json
+  extra_bedrock_models = [
+    {
+      id   = "us.anthropic.claude-sonnet-4-6-v1:0"
+      name = "Claude Sonnet 4.6"
+    },
+  ]
 }
