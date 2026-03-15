@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "openclaw_ses" {
 
 module "openclaw" {
   source  = "registry.infrahouse.com/infrahouse/openclaw/aws"
-  version = "0.3.0"
+  version = "0.3.1"
 
   providers = {
     aws     = aws.aws-493370826424-uw1
