@@ -28,6 +28,7 @@ locals {
     "terraform-aws-lambda-monitored",
     "terraform-aws-openclaw",
     "terraform-aws-openvpn",
+    "terraform-aws-org-governance",
     "terraform-aws-percona-server",
     "terraform-aws-pmm-ecs",
     "terraform-aws-postfix",
