@@ -7,6 +7,10 @@ locals {
     {
       email     = "aleks@infrahouse.com"
       full_name = "Oleksandr Kuzminskyi"
+    },
+    {
+      email     = "anton@infrahouse.com"
+      full_name = "Anton"
     }
   ]
 }
