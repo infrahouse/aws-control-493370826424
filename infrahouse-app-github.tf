@@ -33,9 +33,10 @@ module "infrahouse-app-github-webhook-secret" {
   ]
 }
 
+# The GitHub App - https://github.com/apps/infrahouse
 resource "aws_ssm_parameter" "infrahouse_app_github_app_id" {
   name        = "/infrahouse-app/github-app/app-id"
   description = "GitHub App InfraHouse (SaaS) — App ID"
   type        = "String"
-  value       = "PLACEHOLDER"
+  value       = "3609972"
 }
