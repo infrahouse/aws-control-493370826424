@@ -16,11 +16,17 @@ module "infrahouse-app-github-app-key" {
   ]
 }
 
+resource "random_password" "infrahouse_app_github_webhook_secret" {
+  length  = 48
+  special = true
+}
+
 module "infrahouse-app-github-webhook-secret" {
   source             = "registry.infrahouse.com/infrahouse/secret/aws"
   version            = "1.1.1"
   secret_description = "GitHub App InfraHouse (SaaS) webhook secret"
   secret_name_prefix = "infrahouse-app-github-webhook-secret"
+  secret_value       = random_password.infrahouse_app_github_webhook_secret.result
   environment        = local.environment
   writers = [
     local.admin_role_arn
