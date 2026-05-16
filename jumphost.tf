@@ -7,7 +7,7 @@ module "jumphost" {
   ubuntu_codename         = "noble"
   subnet_ids              = module.management.subnet_private_ids
   nlb_subnet_ids          = module.management.subnet_public_ids
-  environment             = var.environment
+  environment             = local.environment
   route53_zone_id         = module.infrahouse_com.infrahouse_zone_id
   asg_max_size            = 1
   asg_min_size            = 1
@@ -16,7 +16,7 @@ module "jumphost" {
     package-publisher : aws_iam_policy.package-publisher.arn
     jumphost-assume : aws_iam_policy.jumphost-assume.arn
   }
-  puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${var.environment}/hiera.yaml"
+  puppet_hiera_config_path = "/opt/infrahouse-puppet-data/environments/${local.environment}/hiera.yaml"
   packages = [
     "infrahouse-puppet-data"
   ]

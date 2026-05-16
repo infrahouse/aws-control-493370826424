@@ -20,7 +20,7 @@ resource "aws_ses_domain_identity_verification" "verification" {
 }
 
 resource "aws_iam_user" "emailer" {
-  name = "${var.environment}-emailer"
+  name = "${local.environment}-emailer"
 }
 
 resource "aws_iam_access_key" "emailer" {
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "emailer-permissions" {
 }
 
 resource "aws_iam_policy" "emailer" {
-  name   = "${var.environment}-emailer"
+  name   = "${local.environment}-emailer"
   policy = data.aws_iam_policy_document.emailer-permissions.json
 }
 
@@ -55,7 +55,7 @@ module "smtp_credentials" {
   version            = "1.1.1"
   secret_description = "SMTP credentials for Postfix smarthost"
   secret_name_prefix = "smtp_credentials"
-  environment        = var.environment
+  environment        = local.environment
   secret_value = jsonencode(
     {
       user : aws_iam_access_key.emailer.id,

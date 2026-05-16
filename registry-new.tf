@@ -7,7 +7,7 @@ module "registry" {
   }
 
   service_name = "terraform-registry-2"
-  environment  = var.environment
+  environment  = local.environment
 
   subnets_backend  = module.management.subnet_private_ids
   subnets_frontend = module.management.subnet_public_ids

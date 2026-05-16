@@ -28,7 +28,6 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
-.terraform.lock.hcl
 tf.plan
 .idea
 /docs/_build/
@@ -36,3 +35,5 @@ tf.plan
 /plan.stdout
 /modules/jumphost/update_dns.zip
 /.claude/*.local.json
+.claude/reviews/
+.claude/internal/
