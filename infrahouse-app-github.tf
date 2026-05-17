@@ -33,6 +33,17 @@ module "infrahouse-app-github-webhook-secret" {
   ]
 }
 
+module "infrahouse-app-github-oauth" {
+  source             = "registry.infrahouse.com/infrahouse/secret/aws"
+  version            = "1.1.1"
+  secret_description = "GitHub App InfraHouse (SaaS) OAuth credentials (JSON: client_id + client_secret)"
+  secret_name_prefix = "infrahouse-app-github-oauth"
+  environment        = local.environment
+  writers = [
+    local.admin_role_arn
+  ]
+}
+
 # The GitHub App - https://github.com/apps/infrahouse
 resource "aws_ssm_parameter" "infrahouse_app_github_app_id" {
   name        = "/infrahouse-app/github-app/app-id"
