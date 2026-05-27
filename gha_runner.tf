@@ -4,6 +4,9 @@ module "actions-runner-pem" {
   secret_description = "GitHub App PEM key for actions-runner"
   secret_name_prefix = "actions-runner-pem"
   environment        = local.environment
+  readers = [
+    "arn:aws:iam::493370826424:role/actions-runner-*",
+  ]
   writers = [
     local.admin_role_arn
   ]
