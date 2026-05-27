@@ -5,8 +5,7 @@ module "actions-runner-pem" {
   secret_name_prefix = "actions-runner-pem"
   environment        = local.environment
   readers = [
-    "arn:aws:iam::493370826424:role/actions-runner-*_registration*",
-    "arn:aws:iam::493370826424:role/actions-runner-*_deregistration*",
+    "arn:aws:iam::493370826424:role/actions-runner-20*",
   ]
   writers = [
     local.admin_role_arn
