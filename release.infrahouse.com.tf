@@ -2,6 +2,12 @@ locals {
   supported_codenames = [
     "jammy", "noble", "oracular"
   ]
+  # Long-lived repos that must never have their bucket (and published packages)
+  # force-destroyed. Retiring codenames are intentionally left off this list so
+  # their buckets can be torn down when removed from supported_codenames.
+  permanent_codenames = [
+    "noble"
+  ]
   index_body = file("./files/releases.html")
 }
 module "release_infrahouse_com" {
@@ -25,7 +31,7 @@ module "release_infrahouse_com" {
   index_title          = "InfraHouse Releases Repository"
   index_body           = local.index_body
   zone_id              = module.infrahouse_com.infrahouse_zone_id
-  bucket_force_destroy = true
+  bucket_force_destroy = contains(local.permanent_codenames, each.value) ? false : true
   bucket_admin_roles = [
     module.infrahouse-puppet-data-github.github_role_arn,
     module.puppet-code-github.github_role_arn,
