@@ -31,6 +31,7 @@ module "actions-runner-noble" {
   asg_min_size               = 1
   on_demand_base_capacity    = 0
   ubuntu_codename            = "noble"
+  ami_id                     = data.aws_ami.infrahouse_pro_noble.id
   extra_labels               = ["noble"]
   puppet_hiera_config_path   = "/opt/infrahouse-puppet-data/environments/${local.environment}/hiera.yaml"
   packages = [
