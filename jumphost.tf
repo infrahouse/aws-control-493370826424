@@ -5,6 +5,7 @@ module "jumphost" {
     aws = aws.aws-493370826424-uw1
   }
   ubuntu_codename         = "noble"
+  ami_id                  = data.aws_ami.infrahouse_pro_noble.id
   subnet_ids              = module.management.subnet_private_ids
   nlb_subnet_ids          = module.management.subnet_public_ids
   environment             = local.environment
