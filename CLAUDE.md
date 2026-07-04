@@ -22,7 +22,7 @@ This is the Terraform control repo for AWS account **493370826424**
   jumphost for private access
 - **DNS**: Route53 zones for infrahouse.com, twindb.com, selfdrivedb.app, cicd.infrahouse.com
 - **Terraform Module Registry**: Private registry at registry.infrahouse.com with 50+ modules
-- **Debian Package Repos**: release-{focal,jammy,noble,oracular}.infrahouse.com
+- **Debian Package Repos**: release-{jammy,noble,oracular}.infrahouse.com
 - **ECR Public Repos**: Container images under public.ecr.aws/infrahouse/
 - **GitHub OIDC Roles**: IAM roles for GitHub Actions CI/CD across ~10 repositories
 - **GitHub Backup Service**: EC2-based GitHub backup with Puppet configuration
