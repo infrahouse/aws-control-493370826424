@@ -1,6 +1,6 @@
 locals {
   supported_codenames = [
-    "jammy", "noble", "oracular"
+    "jammy", "noble"
   ]
   # Long-lived repos that must never have their bucket (and published packages)
   # force-destroyed. Retiring codenames are intentionally left off this list so

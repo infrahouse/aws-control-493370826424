@@ -28,6 +28,15 @@ Removing one codename destroys that module instance's resources:
 - **Secrets Manager** `packager-key-<codename>` and `packager-passphrase-<codename>` (the signing
   key + passphrase). The `infrahouse/secret/aws` module governs the deletion/recovery window —
   check whether they're recoverable or force-deleted before you apply.
+- **AWS Backup vault** `infrahouse-release-<codename>-backup` (`aws_backup_vault.repo`) plus its
+  backup plan/selection/role and a dedicated backup KMS key. ⚠️ **This is the one that bites you:**
+  the vault holds *recovery points* (scheduled backups of the repo bucket), and AWS **refuses to
+  delete a non-empty vault**. `debian-repo` 3.2.0 has no force-empty, so `terraform apply` gets
+  through the entire rest of the codename teardown and then **fails at the vault** with
+  `InvalidRequestException: Backup vault cannot be deleted because it contains recovery points`
+  (this is exactly what happened retiring **focal** — PR #389 / CD run 28709989944). You must empty
+  the vault first (see procedure). Note: those recovery points are the *last recoverable copy* of
+  the packages once the bucket is force-destroyed — deleting them is the final irreversible step.
 - The globally-unique S3 bucket name `infrahouse-release-<codename>` is released on delete.
 
 **Rollback reality:** re-adding the codename + restoring `files/DEB-GPG-KEY-infrahouse-<codename>`
@@ -60,7 +69,21 @@ For `CODENAME` in the chosen order:
   resources** (bucket, logs bucket, CloudFront, OAC, cache policy, auth fn, Route53 record, ACM
   cert + validation, `packager-key-CODENAME` / `packager-passphrase-CODENAME`). No changes to
   `["noble"]` or any remaining codename. If anything else shows up, stop.
-- [ ] Apply.
+- [ ] **Empty the AWS Backup vault BEFORE (or right alongside) the apply.** The apply will destroy
+  everything else and then die on `aws_backup_vault.repo` if the vault still holds recovery points.
+  With admin creds:
+  ```bash
+  VAULT=infrahouse-release-CODENAME-backup; REGION=us-west-1
+  aws backup describe-backup-vault --backup-vault-name "$VAULT" --region "$REGION"  # check for Vault Lock
+  for ARN in $(aws backup list-recovery-points-by-backup-vault --backup-vault-name "$VAULT" \
+      --region "$REGION" --query 'RecoveryPoints[].RecoveryPointArn' --output text); do
+    aws backup delete-recovery-point --backup-vault-name "$VAULT" --region "$REGION" --recovery-point-arn "$ARN"
+  done
+  ```
+  (If the vault is Vault-Lock'd in compliance mode, recovery points can't be deleted until their
+  minimum retention elapses — plan around that.)
+- [ ] Apply. If a prior apply already died at the vault, take a **fresh** plan first — the stored
+  CD plan will be stale (most focal/CODENAME resources are already gone from state).
 - [ ] Verify destroyed: `dig +short release-CODENAME.infrahouse.com` → empty; `aws s3 ls
   s3://infrahouse-release-CODENAME` → gone; secrets no longer listed (or in pending-deletion).
 - [ ] Verify **unaffected**: `noble` (and any not-yet-removed codenames) still resolve and
