@@ -32,7 +32,10 @@ module "release_infrahouse_com" {
     file("./files/DEB-GPG-KEY-infrahouse-${each.value}"),
     file("./files/DEB-GPG-KEY-infrahouse-noble-2026-07-04")
   ]
-  gpg_sign_with        = "packager-${each.value}@infrahouse.com"
+  gpg_sign_with = join(" ", [
+    "A627B77600190BA51B903453D37A181B689AD619", # expires: 2026-07-20
+    "F251F649638B680236DCF9BB8FF1CE88CA0D5F6D", # expires: 2036-07-01
+  ])
   index_title          = "InfraHouse Releases Repository"
   index_body           = local.index_body
   zone_id              = module.infrahouse_com.infrahouse_zone_id
