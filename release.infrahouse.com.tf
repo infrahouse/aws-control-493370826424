@@ -16,8 +16,10 @@ module "release_infrahouse_com" {
     aws     = aws.aws-493370826424-uw1
     aws.ue1 = aws.aws-493370826424-ue1
   }
-  source                = "registry.infrahouse.com/infrahouse/debian-repo/aws"
-  version               = "3.2.0"
+  source             = "registry.infrahouse.com/infrahouse/debian-repo/aws"
+  version            = "4.0.0"
+  replication_region = local.dr_region
+
   bucket_name           = "infrahouse-release-${each.value}"
   repository_codename   = each.value
   package_version_limit = 0
@@ -25,8 +27,10 @@ module "release_infrahouse_com" {
     "amd64",
     "arm64"
   ]
-  domain_name          = "release-${each.value}.infrahouse.com"
-  gpg_public_key       = file("./files/DEB-GPG-KEY-infrahouse-${each.value}")
+  domain_name = "release-${each.value}.infrahouse.com"
+  gpg_public_keys = [
+    file("./files/DEB-GPG-KEY-infrahouse-${each.value}")
+  ]
   gpg_sign_with        = "packager-${each.value}@infrahouse.com"
   index_title          = "InfraHouse Releases Repository"
   index_body           = local.index_body
