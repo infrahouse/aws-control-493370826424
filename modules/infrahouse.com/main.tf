@@ -59,3 +59,14 @@ resource "aws_route53_record" "_gh-infrahouse-o" {
   ]
   ttl = 3600
 }
+
+## lemlist custom tracking domain
+resource "aws_route53_record" "route_lemlist" {
+  name    = "route.${aws_route53_zone.infrahouse_com.name}"
+  type    = "CNAME"
+  zone_id = aws_route53_zone.infrahouse_com.id
+  ttl     = 3600
+  records = [
+    "custom.lemlist.com."
+  ]
+}
