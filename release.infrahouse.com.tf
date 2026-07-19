@@ -29,7 +29,6 @@ module "release_infrahouse_com" {
   ]
   domain_name = "release-${each.value}.infrahouse.com"
   gpg_public_keys = [
-    file("./files/DEB-GPG-KEY-infrahouse-${each.value}"),
     file("./files/DEB-GPG-KEY-infrahouse-noble-2026-07-04")
   ]
   gpg_sign_with = join(" ", [
