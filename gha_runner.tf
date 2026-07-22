@@ -14,7 +14,7 @@ module "actions-runner-pem" {
 
 module "actions-runner-noble" {
   source  = "registry.infrahouse.com/infrahouse/actions-runner/aws"
-  version = "4.0.0"
+  version = "4.2.0"
   providers = {
     aws = aws.aws-493370826424-uw1
   }
